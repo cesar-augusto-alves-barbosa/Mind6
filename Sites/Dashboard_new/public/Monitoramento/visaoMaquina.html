@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/visaoMaquina.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="shortcut icon" href="../img/logofavicon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f87ccf6615.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+
+    <title>Visão Máquina</title>
+</head>
+
+<body>
+    <div id='bgPopUpAlerta' class="bg_pop_up_alerta"></div>
+    <div id='divPopUpAlerta' class="div_pop_up_alerta">
+        <div id='PopUpAlerta' class="pop_up_alerta">
+            <div onclick="fecharPopUp()" class="fechar_pop_up">X</div>
+            <div class="mensagem_pop_up">
+                Tem certeza que deseja excluir esse processo da sua Black List?
+            </div>
+            <div class="div_box_btns">
+                <button onclick="removerProcessoComputador()" class="btn_pop_up btn_pop_up_confirmar">Confirmar</button>
+                <button onclick="fecharPopUp()" class="btn_pop_up btn_pop_up_cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="menu" id="menuBar">
+        <a href="../index.html"><img id="header__logo" src="../img/Logo-DotControlTec.png" alt=""></a>
+        <ul class="lista_links_menu">
+            <li><a href="../Monitoramento/visaoGlobal.html">Visão Global</a></li>
+            <li><a href="../Monitoramento/visaoMaquina.html">Visão Máquina</a></li>
+
+            <li><a href="../blacklist.html">Blacklist</a></li>
+            <li id="link_gestor"><a href="../administrador.html">Administrador</a></li>
+        </ul>
+        <a href="#"><i onclick="setModal()" id="header__profile" class="fas fa-user-circle"></i></a>
+    </header>
+
+
+
+    <div id="modal" class="bg-modal">
+        <div id="profile__modal" class="modal">
+            <i id="modal__i-user" class="fas fa-user-circle"></i> <br>
+            <span id="modal__spn-nome"></span> <br> <br>
+            <span id="modal__spn-email"></span> <br> <br>
+            <a href="../profile.html"><button id="modal__btn-config">Configurar conta</button></a>
+            <div id="modal__div-linha"></div>
+            <button onclick="finalizar_sessao('../login.html')" id="modal__btn-sair">Sair</button>
+        </div>
+
+        <div onclick="fecharModal()" class="fundo" style="width: 100%; height: 100%; ">
+
+        </div>
+    </div>
+
+    <div class="showcase-conteudo">
+        <div class="container">
+            <div id="container__div-titulo">
+                <span id="container__spn-titulo"><b>VISÃO DAS MÁQUINAS</b></span>
+            </div>
+
+
+            <div id="container__div-pesquisa">
+                <span>Computador</span> <br>
+                <input id="div-pesquisa__inp-nomeComp" placeholder="Digite o nome do Host" type="text">
+                <button onclick="searchMachine()" class="div-pesquisa__btn"
+                    id="div-pesquisa__btn-pesquisar">Pesquisar</button>
+
+            </div>
+            <button onclick="location.reload()" class="div-pesquisa__btn" id="div-pesquisa__btn-voltar">Voltar</button>
+
+            <!-- Lista de computadores -->
+            <div id="container__div-idlista" class="container__div-lista" style="display: block;">
+                <table class="div-lista__table-listaMaquinas">
+                    <thead class="table-listaMaquinas__thead-lista">
+                        <th>Nome Computador</th>
+                        <th>Sistema Operacional</th>
+                        <th>Ipv4</th>
+                        <th>Serial Number</th>
+                        <th>Disponibilidade</th>
+                    </thead>
+                    <tbody id="listaMaquinas">
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- Gráficos -->
+            <div id="container__div-graficos" style="display: none;">
+
+
+                <div class="container-graficos">
+                    <div id="container-graficos__div-disponibilidade" class="container-graficos__div-configuracao">
+                        <span class="div-configuracao__span-uso" id="disponivel">
+                            <span>DISPONIBILIDADE:
+                                <span class="txt_informations">
+
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+
+                    <div id="container-graficos__div-usoDisco" class="container-graficos__div-configuracao">
+                        <canvas style="width: 100%; height: 250px;" id="grafico_disco"></canvas>
+                        <span class="div-configuracao__span-uso">Uso Disco: <span id="uso_disco"></span></span>
+                    </div>
+
+                    <div id="container-graficos__div-usoCpu" class="container-graficos__div-configuracao">
+                        <canvas style="width: 100%; height: 250px;" id="grafico_cpu"></canvas>
+                        <span class="div-configuracao__span-uso">Uso CPU: <span id="uso_cpu"></span></span>
+                    </div>
+
+                    <div id="container-graficos__div-usoRam" class="container-graficos__div-configuracao">
+                        <canvas style="width: 100%; height: 250px;" id="grafico_memoria"></canvas>
+                        <span class="div-configuracao__span-uso">Uso RAM: <span id="uso_memoria"></span></span>
+                    </div>
+
+                    <div id=" container-graficos__div-uptime" class="container-graficos__div-configuracao">
+
+                        <span class="div-configuracao__span-uso">
+                            <span>
+                                STATUS DA MÁQUINA:
+                                <span class="txt_informations" id="info_uptime">
+                                </span>
+                            </span>
+                    </div>
+
+
+                </div>
+
+                <div class="container-graficos-trabalhados">
+                    <div style="width: 100%; height: 150px; margin-left: 10px;">
+
+                        <div id="container-graficos__div-mediaCpu" class="container-graficos__div-configuracao">
+                            <canvas id="grafico_comparacao_cpu_computadores"></canvas>
+                        </div>
+                    </div>
+
+                    <div style="width: 100%; height: 150px; margin-right: 10px;">
+
+                        <div id="container-graficos__div-tempCpu" class="container-graficos__div-configuracao">
+                            <canvas id="grafico_comparacao_ram_computadores"></canvas>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="container-configuracao_maquina">
+                    <div class="container-configuracao_maquina__box">
+                        <h2>Informações da Máquina</h2>
+                        <div class="div_lista_infomacoes_maquina">
+                            <img id="loadingInfoMaquina" src="../img/gifLoading.gif" class="loading_info_maquina">
+                            <ul id="lista_informacoes_maquina" class="lista_infomacoes_maquina">
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="container-blacklist_computador">
+                    <div class="container-blacklist_computador__box">
+                        <iframe style="display:none;" name="blacklist" src="visaoMaquina.html"></iframe>
+                        <form target="blacklist" id="form_cadastro" href="visaoMaquina.html" method="post"
+                            class="container_black_list__formulario_cadastro">
+                            <label for="">CADASTRO DE PROCESSO NA BLACKLIST</label>
+                            <label for="">Selecione o nome do processo que você deseja adicionar a blacklist desse
+                                computador</label>
+                            <select type="text" name="nome" id="processos_escola">
+                                <option value="">Selecione um processo</option>
+                            </select>
+                            <button onclick="return inserirProcessoBlacklistMaquina()"
+                                class="container_black_list__btn_adicionar">Adicionar</button>
+                            <div id="resposta_cadastro"></div>
+                        </form>
+                        <hr class="container_black_list__divisoria">
+                        <div class="div_tabela_blacklist">
+                            <h3>BlackList Máquina</h3>
+                            <table class="tabela_blacklist">
+                                <thead>
+                                    <th>Processo(s) Bloqueado(s)</th>
+                                </thead>
+                                <tbody id="tabela_processos_blacklist">
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script src="../js/function.js"></script>
+<script src="https://bernii.github.io/gauge.js/dist/gauge.min.js"></script>
+<script src="../js/chartsVisaoMaquina.js"></script>
+<script src="../js/blacklistComputadores.js"></script>
+<script src="../js/removerProcessoBackListEscola.js"></script>
+
+
+<script>
+    let disposicao_maq;
+
+    function searchMachine() {
+        let maquina = document.getElementById('div-pesquisa__inp-nomeComp').value;
+        if (maquina == '') {
+            listaMaquinas.innerHTML = '';
+            addMachines();
+        } else {
+
+            fetch(`/computador/recuperar_especifica/${sessionStorage.fkEscola}/${maquina}`, {
+                method: "GET"
+            }).then(response => {
+
+                if (response.ok) {
+                    listaMaquinas.innerHTML = '';
+                    let disponibilidade;
+                    response.json().then(json => {
+                        if (json[0].disponibilidade) {
+                            disponibilidade = '<td style="color: green; font-weight: bold;">On</td>'
+                        } else {
+                            disponibilidade = '<td style="color: red; font-weight: bold;">Off</td>'
+                        }
+                        listaMaquinas.innerHTML += `<tr class="tr-maquina" onclick="selectMachine(${"machine" + 0}, ${json.length})" id="machine${0}" data-idComputer="${json[0].idComputador}" data-disponibilidade="${json[0].disponibilidade}" >
+                            <td>${json[0].nomeComputador}</td>
+                            <td>${json[0].sistemaOperacional}</td>
+                            <td>${json[0].ipv4}</td>
+                            <td>${json[0].serialNum}</td>
+                            ${disponibilidade}
+                        </tr>`
+
+                        if (disponibilidade == "On") {
+                            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: green;justify-content:center; display:flex; font-size: 50px; text-transform: uppercase">
+                            ${disponibilidade}</span></span>`;
+                        } else {
+                            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: red;justify-content:center; display:flex; font-size: 50px;text-transform: uppercase"><br>
+                            ${disponibilidade}</span></span>`;
+                        }
+                    });
+
+                } else {
+
+                    console.log('Erro ao recuperar máquina especifica!');
+
+                    response.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+            });
+
+        }
+
+    }
+
+    function addMachines() {
+        fetch(`/computador/recuperar/${sessionStorage.fkEscola}`, {
+            method: "GET"
+        }).then(response => {
+
+            if (response.ok) {
+
+                response.json().then(json => {
+                    let disponibilidade;
+                    for (let i = 0; i < json.length; i++) {
+                        if (json[i].disponibilidade) {
+                            disponibilidade = '<td style="color: green; font-weight: bold;">On</td>'
+                        } else {
+                            disponibilidade = '<td style="color: red; font-weight: bold;">Off</td>'
+                        }
+                        listaMaquinas.innerHTML += `<tr class="tr-maquina" onclick="selectMachine(${"machine" + i}, ${json.length})" id="machine${i}" data-idComputer="${json[i].idComputador}" data-numeroserial="${json[i].serialNum}" data-ipv4="${json[i].ipv4}" data-so="${json[i].sistemaOperacional}" data-nomecomputador="${json[i].nomeComputador}" data-disponibilidade="${json[i].disponibilidade}">
+                            <td>${json[i].nomeComputador}</td>
+                            <td>${json[i].sistemaOperacional}</td>
+                            <td>${json[i].ipv4}</td>
+                            <td>${json[i].serialNum}</td>
+                            ${disponibilidade}
+                        </tr>`;
+
+                    }
+
+                });
+
+            } else {
+
+                console.log('Erro ao recuperar máquinas!');
+
+                response.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        });
+
+    }
+    addMachines();
+
+    function selectMachine(n, max) {
+        n.backgroundColor = "#0156ff"
+        let disponibilidadeComp = n.dataset.disponibilidade;
+        nomeMaquina = n.dataset.nomecomputador;
+        sistemaOperacionalMaquina = n.dataset.so;
+        ipv4Maquina = n.dataset.ipv4;
+        serialNumMaquina = n.dataset.numeroserial;
+        if (disponibilidadeComp == "true") {
+            setLigado();
+            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: green;justify-content:center; display:flex; font-size: 50px; text-transform: uppercase">
+                            ON</span></span>`;
+        } else {
+            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: red;justify-content:center; display:flex; font-size: 50px;text-transform: uppercase"><br>
+                            OFF</span></span>`;
+        }
+        let idMachineSelected = n.dataset.idcomputer;
+        sessionStorage.idComputador = idMachineSelected;
+        document.getElementById('container__div-graficos').style.display = 'block';
+        document.getElementById('container__div-pesquisa').style.display = 'none';
+        document.getElementById('div-pesquisa__btn-voltar').style.display = 'block';
+
+        document.getElementById('container__div-idlista').style.display = 'none';
+
+        percentColors = [
+            [0.0, "#a9d70b"],
+            [0.50, "#f9c802"],
+            [1.0, "#ff0000"]
+        ];
+        loadingInfoMaquina.style.display = 'block';
+        let intervaloParaInformacoesMaquina = setInterval(() => {
+            atualizaInformacoesMaquina();
+            clearInterval(intervaloParaInformacoesMaquina);
+        }, 2000);
+        atualizaGraficos()
+        recuperaProcessosComputador();
+        let intervaloRercuperacaoProcessoEscola = setInterval(() => {
+            recuperaProcessosEscola();
+            clearInterval(intervaloRercuperacaoProcessoEscola);
+        }, 1000)
+    }
+</script>

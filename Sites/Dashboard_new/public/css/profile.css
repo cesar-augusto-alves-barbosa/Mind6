@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+body, html{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: #ededed;
+}
+
+.showcase{
+    width: 100%;
+    height: 640px;
+}
+
+.container{
+    width: 35%;
+    height: 490px;
+    background-color:white;
+    margin-left: 430px;
+    margin-top: 20px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    display: flex;
+    display: inline-block;
+}
+
+#container__spn-profile{
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px;
+}
+
+#container__i-user{
+    color: lightgrey;
+    background: white;
+    border-radius: 48px;
+    font-size: 80px;
+}
+
+#container__i-pen{
+    font-size: 24px;
+    margin-left: -76px;
+}
+
+.container__div-profile{
+    width: 89%;
+    height: 150px;
+    background-color: #0b44b5;
+    padding-left: 50px;
+    padding-top: 20px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    
+}
+
+#container__spn-ola{
+    float: left;
+    margin-left: 94px;
+    margin-top: -58px;
+}
+
+#container__spn-nome{
+    font-size: 18px;
+    margin-top: -50px;
+    margin-left: 95px;
+    float: left;
+    font-weight: bold;
+}
+
+.container__div-configuracao{
+    width: 100%;
+    height: 349px;
+    background-color: white;
+    padding-top: 30px;
+}
+
+.fa-moon{
+    font-size: 59px;
+    color: gray;
+    padding: 13px;
+    background-color:#ececec;
+    border-radius: 17px;
+    cursor: pointer;
+}
+
+.fa-moon:hover{
+    background: #f8f8f8;
+    color: rgb(201, 201, 201);
+}
+
+.fa-lock{
+    background: #ececec;
+    font-size: 59px;
+    color: gray;
+    padding: 15px;
+    border-radius: 17px;
+    cursor: pointer;
+}
+
+.fa-lock:hover{
+    background: #f8f8f8;
+    color: rgb(201, 201, 201);
+}
+
+.fa-power-off{
+    font-size: 59px;
+    color: white;
+    background: #fd3f3f;
+    padding: 11.3px;
+    border-radius: 17px;
+    cursor: pointer;
+}
+
+.fa-power-off:hover{
+    background: #fc5a5a;
+}
+
+.div-configuracao__div{
+    width: 96%;
+    height: 88px;
+    display: flex;
+    margin-bottom: 30px;
+    margin-left: 17px;
+}
+
+.div-configuracao__spn{
+    margin-top: 37px;
+    margin-left: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -1,0 +1,63 @@
+Primeira Página (Home):
+(https://wireframe.cc/oQ4wR0)
+
+P1.: 
+	- Menu fixo acompanha a página toda;
+	- Menu contém:
+	- Home - Sobre nós - Sistema - Contato - Cadastro - Logo;
+	- Cada link faz rolagem suave de página;
+	
+
+P2.:  
+	- Há uma imagem com desfoque ou pouco brilho com um possível slogan no centro da imagem sobre a MIND6;
+	- Abaixo da imagem está o sobre nós;
+
+
+P3.: 
+	- Explicação do que o sistema faz;
+	- Há imagens para ilistração e um texto ao lado;
+	- Para dinamica imagens e textos invertem;
+	- Abaixo da dinamica uma imagem real do funcionamento do sistema;
+
+
+P4.: 
+	- Footer com nossa logo e localização;
+	- Redes sociais ;
+	- Contato:
+	Emails, telefones, suporte etc. 
+
+
+
+Segunda Página (Contato):
+(https://wireframe.cc/zqa0qc)
+
+P1.: 
+	- Menu fixo acompanha a página toda;
+	- Menu contém:
+	- Home - Sobre nós - Sistema - Cadastro - Logo;
+
+
+P2.: 
+	- Há um Mapa com nossa localização;
+	- Descrição do local:
+	Endereço, Bairro, Número, complemento e ponto de referência;
+
+
+P3.: 	
+	- Local para envio de dúvidas;
+	- Nome, Numero, email e assunto. TODOS OBRIGATORIOS;
+
+
+P4.: 
+	- Footer com nossa logo e localização;
+	- Redes sociais ;
+	- Contato:
+	Emails, telefones, suporte etc. 
+
+
+Terceira Página (Login/Cadastro):
+1º (https://wireframe.cc/SGBgFE)
+2º  
+
+
+	

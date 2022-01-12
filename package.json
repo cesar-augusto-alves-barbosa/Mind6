@@ -1,0 +1,36 @@
+{
+  "name": "dashboardmind6",
+  "version": "0.0.0",
+  "engines": {
+    "node": "12"
+  },
+  "main": "Sites/Dashboard_new/bin/www",
+  "private": true,
+  "scripts": {
+    "start": "node Sites/Dashboard_new/bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "debug": "^2.6.9",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "http-errors": "~1.6.3",
+    "morgan": "^1.9.1",
+    "mssql": "^5.1.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^5.22.3",
+    "tedious": "^6.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BandTec/Mind6.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BandTec/Mind6/issues"
+  },
+  "homepage": "https://github.com/BandTec/Mind6#readme",
+  "description": ""
+}

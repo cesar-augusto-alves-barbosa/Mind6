@@ -1,0 +1,249 @@
+:root {
+    --cor-principal: #0f0fd8;
+    --cor-secundaria: #1B2431;
+    --cor-terciaria: #016795;
+    --cor-quartenaria: #1E488F;
+}
+
+body, html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.laboratorio {
+    width: 100%;
+    background: url('../Logos/Logo-DotControlTec.png') center top no-repeat;
+    background-size: 45%;
+    height: 380px;
+    margin-top: 30px;
+}
+
+.laboratorio div {
+    background: rgba(0, 0, 0, 0.5);
+    height: 97%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.infoProject {
+    width: 100%;
+    height: 465px;
+    padding-top: 200px;
+    background: url(../img/escritorio.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    text-align: center;
+}
+
+.project1 {
+    padding-top: 50px;
+}
+
+.project1 h1 {
+    color: white;
+    font-size: 60px;
+}
+
+#controltec h1 {
+    text-align: center;
+    font-size: 48px;
+    width: 100%;
+
+    background-color: var(--cor-terciaria);
+    color: #ffffff;
+
+    margin-top: 20px;
+}
+
+.cards img {
+    width: 400px;
+    margin-top: 50px;
+}
+
+.cards {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    height: auto;
+    margin: -5% auto;
+}
+
+.card {
+    margin: 77px 10px;
+    height: 320px;
+}
+
+.g-1 p {
+    margin: 70px 10px;
+    text-align: justify;
+    font-size: 20px;
+}
+
+
+#controltecVantagens h1 {
+    text-align: center;
+    font-size: 48px;
+
+    /* border-bottom: solid 5px black; */
+    background-color: var(--cor-terciaria);
+    width: 100%;
+
+
+    color: #ffffff;
+    /* text-shadow: 2px 2px 2px var(--cor-secundaria); */
+}
+
+#controltecVantagens h2 {
+    text-align: center;
+    font-size: 30px;
+
+    color: black;
+}
+
+.cardsv {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+}
+
+.cardsv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    height: auto;
+    margin: 4% auto;
+}
+
+.card {
+    margin: 77px 10px;
+    height: 320px;
+}
+
+.cardv p {
+    margin-top: 5%;
+    text-align: justify;
+    font-size: 20px;
+
+    font-weight: 500;
+}
+
+.cardvText p {
+    margin-top: 6%;
+    text-align: justify;
+    font-size: 20px;
+
+    font-weight: 500;
+}
+
+lottie-player {
+    margin-left: 110px;
+}
+
+.time {
+    margin-left: 177px;
+}
+
+/*REPONSIVIDADE*/
+@media (max-width: 1200px) {
+    .cardsv {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        margin: 4% 0vw;
+    }
+
+    .time {
+        margin-left: 106px;
+    }
+}
+
+@media (max-width: 992px) {
+    .g-1 p {
+        margin: 40px 10px;
+        text-align: justify;
+        font-size: 20px;
+    }
+
+    .cardsv {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        margin: 6% -5vw;
+    }
+
+    .cardsv {
+        text-align: center;
+        width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        height: auto;
+        margin: -10% auto;
+    }
+
+    .cards img {
+        width: 400px;
+        margin-top: 125px;
+    }
+
+    .card {
+        margin: 15px 10px;
+        height: 325px;
+    }
+
+    .cardsv {
+        display: grid;
+        grid-template-columns: 1fr;
+        height: auto;
+        margin: 4% auto;
+    }
+
+    .time {
+        margin-left: 210px;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        height: auto;
+        margin: -20% auto;
+    }
+
+    .card {
+        margin: 15px 10px;
+        height: 330px;
+    }
+
+    .g-1 p {
+        margin: -5px 10px;
+        text-align: justify;
+        font-size: 20px;
+    }
+
+    .time {
+        margin-left: 140px;
+    }
+
+}

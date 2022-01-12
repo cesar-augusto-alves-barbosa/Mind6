@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="shortcut icon" href="./img/logofavicon.png" type="image/x-icon">
+    <title>Entrar</title>
+</head>
+
+<body>
+    <div class="login">
+        <div class="left__login">
+
+        </div>
+
+        <div class="right__login">
+            <img src="./img/Logo-DotControlTec.png" alt="">
+            <form onsubmit="return entrar()" id="form_login" method="post">
+                <span id="right__span-titulo">Entre com sua conta</span> <br> <br>
+                <input placeholder="nome@example.com" type="email" id="login" name="login" class="right__input">
+                <br>
+                <input placeholder="senha" type="password" id="senha" name="senha" class="right__input"> <br>
+
+                <button type="submit" class="right__button">Entrar</button> <br> <br>
+                <span id="form_login__span-error"></span>
+                <img id="loading" src="./img/gifLoading.gif" style="display: none; margin: 0 auto;">
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- <script src="../routes/tecnico.js"></script> -->
+<script>
+
+    function entrar() {
+        loading.style.display = 'block';
+        var formulario = new URLSearchParams(new FormData(form_login));
+        fetch("/tecnico/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(json => {
+                    loading.style.display = 'none';
+                    sessionStorage.login_usuario_meuapp = json.emailTec;
+                    sessionStorage.nome_usuario_meuapp = json.nomeTecnico;
+                    sessionStorage.nome_escola_meuapp = json.nomeEscola;
+                    sessionStorage.id_usuario_meuapp = json.idTecnico;
+                    if (json.fkGestor == null) {
+                        sessionStorage.gestor = true;
+                    } else {
+                        sessionStorage.gestor = false;
+                    }
+
+                    sessionStorage.fkEscola = json.fkEscola;
+                    window.location.href = 'index.html';
+
+                });
+
+            } else {
+                loading.style.display = 'none';
+                response.text().then(texto => {
+                    document.getElementById('form_login__span-error').innerHTML = texto;
+                    document.getElementById('form_login__span-error').style.color = 'red';
+                });
+            }
+        });
+
+        return false;
+    }
+
+</script>

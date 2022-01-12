@@ -1,0 +1,462 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: #ededed;
+}
+
+.bg_pop_up_alerta {
+    
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 30%;
+    z-index: 10;
+    display: none;
+}
+.div_pop_up_alerta {
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+.pop_up_alerta {
+    position: fixed;
+    width: 30%;
+    height: 50%;
+    background-color: #FFF;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.fechar_pop_up {
+    margin-right: 30px;
+    align-self: flex-end;
+    width: min-content;
+    font-weight: bold;
+    cursor: pointer;
+    top: 0;
+}
+
+
+.mensagem_pop_up {
+    text-align: center;
+    font-weight: bold;
+    width: 80%;
+}
+
+.div_box_btns {
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn_pop_up_confirmar {
+    background-color: #0000ff;
+}
+
+.btn_pop_up_cancelar {
+    background-color: #9e0000;
+}
+
+.btn_pop_up {
+    cursor: pointer;
+    color: white;
+    width: 90%;
+    height: 7vh;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.showcase-conteudo {
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 80vh;
+}
+
+#container__spn-titulo {
+    float: left;
+    margin-left: 500px;
+    font-size: 30px;
+    width: 100%;
+}
+
+#container__div-titulo {
+    width: 60%;
+    height: 40px;
+}
+
+
+
+#container__div-pesquisa {
+    width: 87%;
+    margin-top: 50px;
+    margin-left: 156px;
+}
+
+#container__div-pesquisa span {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#div-pesquisa__inp-nomeComp {
+    width: 170px;
+    height: 24px;
+}
+
+.div-pesquisa__btn {
+    width: 84px;
+    height: 30px;
+    background-color: #0b44b5;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.div-pesquisa__btn:hover {
+    background-color: #1053da;
+}
+
+#div-pesquisa__btn-voltar {
+    display: none;
+    margin: 5vh;
+}
+/* ------------------ Lista de Máquinas ------------------- */
+.container__div-lista {
+    height: min-content;
+    max-height: 80vh;
+    width: 90%;
+    background-color: white;
+    margin: 30px auto;
+    overflow-y: scroll;
+    min-width: 300px;
+    margin-bottom: 90px;
+}
+
+.div-lista__table-listaMaquinas {
+    border-collapse: collapse;
+    border-spacing: 5px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.div-lista__table-listaMaquinas th {
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 0;
+    width: 10px !important;
+}
+
+.div-lista__table-listaMaquinas td,
+.div-lista__table-listaMaquinas th {
+    padding: 8px;
+    border: 2px solid black;
+}
+
+.div-lista__table-listaMaquinas tr {
+    cursor: pointer;
+    text-align: center;
+    transition-duration: .5s;
+}
+
+.div-lista__table-listaMaquinas tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tr-maquina:hover td {
+    transition-duration: .5s;
+    background-color: #a2c1ff;
+}
+
+
+/* ------------------------- GRÁFICOS -------------------------- */
+#container__div-graficos {
+    height: min-content;
+    padding-bottom: 90px;
+}
+
+.container-graficos {
+    width: 99%;
+    height: 300px;
+    display: flex;
+    border: rgb(163, 163, 163) 1px solid;
+
+    margin: 100px 0 40px 7px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-graficos__div-configuracao {
+    background-color: white;
+    border: rgb(51, 51, 51) 1px solid;
+    height: 280px;
+    width: 18%;
+    border-radius: 10px;
+}
+
+.div-configuracao__span-uso {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.txt_informations {
+    color: green;justify-content:center; 
+    display:flex; 
+    font-size: 40px; 
+    text-transform: uppercase
+}
+
+#container-graficos__div-disponibilidade {
+    width: 18%;
+    border-radius: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container-graficos__div-usoDisco {
+    width: 18%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container-graficos__div-usoCpu {
+    width: 19%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container-graficos__div-usoRam {
+    width: 18%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container-graficos__div-uptime {
+    width: 18%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container-graficos__div-mediaCpu {
+    width: 95%;
+    padding-right: 20px;
+    height: 320px;
+}
+
+#container-graficos__div-tempCpu {
+    width: 95%;
+    height: 320px;
+    padding-right: 20px;
+    float: right;
+}
+
+.container-graficos-trabalhados {
+    width: 99%;
+    height: 380px;
+    display: flex;
+    border: rgb(163, 163, 163) 1px solid;
+    margin: 100px 0 40px 7px;
+    padding-top: 50px;
+}
+
+/* ------------------------- CONFIGURACAO MAQUINA -------------------------- */
+
+.container-configuracao_maquina {
+    width: 50%;
+    height: 480px;
+    display: flex;
+    border: rgb(163, 163, 163) 1px solid;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.container-configuracao_maquina__box {
+    width: 90%;
+    height: 90%;
+    background-color: #FFF;
+    box-shadow: 0px 0px 20px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.loading_info_maquina {
+    display: none;
+    margin: 0 auto;
+}
+.container-configuracao_maquina__box h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 30px;
+}
+
+.div_lista_infomacoes_maquina {
+    width: 90%;
+}
+
+.lista_infomacoes_maquina li {
+    list-style: none;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+
+/* ------------------------- BLACK LIST -------------------------- */
+
+.container-blacklist_computador {
+    width: 99%;
+    height: 500px;
+    display: flex;
+    border: rgb(163, 163, 163) 1px solid;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-blacklist_computador__box {
+    width: 90%;
+    height: 90%;
+    background-color: #FFF;
+    box-shadow: 0px 0px 20px black;
+    display: flex;
+    align-items: center;
+}
+
+.container_black_list__divisoria {
+    height: 90%;
+    width: 3px;
+    background-color: #2222FF;
+    border: none;
+    margin: 0;
+}
+
+.container_black_list__formulario_cadastro  {
+    height:90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container_black_list__formulario_cadastro label {
+    text-align: center;
+    font-weight: bold;
+}
+.alerta_processo {
+    padding: 5px;
+    color: rgb(250, 164, 4);
+    background-color:rgb(253, 237, 147);
+    width: 85%;
+    font-size: 12px;
+}
+.container_black_list__formulario_cadastro select {
+    width: 80%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+
+
+
+.container_black_list__btn_adicionar {
+    width: 30%;
+    height: 10%;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    background-color: #2222FF;
+    color: #FFF;
+}
+
+
+
+.div_tabela_blacklist {
+    height: min-content;
+    max-height: 80%;
+    width: 50%;
+    background-color: white;
+    margin: auto auto;
+    overflow-y: scroll;
+    min-width: 300px;
+}
+.div_tabela_blacklist h3 {
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.tabela_blacklist {
+    margin: 30px auto;
+    width: 90% ;
+    border-collapse: collapse;
+}
+.tabela_blacklist td, th{
+    border: 3px solid black;
+}
+
+.tabela_blacklist th {
+    font-size: 20px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.tabela_blacklist tr {
+    font-size: 13px;
+}
+
+.tabela_blacklist tr td {
+    padding: 10px;
+    text-align: center;
+}
+
+@media (max-width: 868px) {
+    .machines__reports__selectors {
+        flex-direction: column;
+        justify-content: space-around;
+        height: 7vh;
+    }
+}

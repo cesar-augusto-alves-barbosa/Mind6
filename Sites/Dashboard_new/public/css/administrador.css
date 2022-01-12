@@ -1,0 +1,58 @@
+.showcase {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-tecnico {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    background-color: #FFF;
+    box-shadow: 0px 0px 10px black;
+}
+
+
+.container-tecnico__formularios  {
+    height:90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container-tecnico__formularios label {
+    text-align: center;
+    font-weight: bold;
+}
+.container-tecnico__formularios input {
+    width: 80%;
+    border: 3px solid black;
+    padding: 10px;
+}
+.container-tecnico__formulario_cadastro__option_adm {
+    display: flex;
+    width: 80%;
+}
+.container-tecnico__formulario_cadastro__option_adm input {
+    width: min-content;
+    border: 3px solid black;
+}
+.container-tecnico__formulario_cadastro__option_adm span {
+    width: 50%;
+}
+
+.container-tecnico__formularios__btn_adicionar {
+    width: 30%;
+    height: 10%;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    background-color: #2222FF;
+    color: #FFF;
+}

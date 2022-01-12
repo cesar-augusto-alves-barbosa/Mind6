@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="shortcut icon" href="./img/logofavicon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f87ccf6615.js" crossorigin="anonymous"></script>
+    <title>Home - Mind 6</title>
+</head>
+
+<body>
+
+    <header class="menu" id="menuBar">
+        <a href="../index.html"><img id="header__logo" src="../img/Logo-DotControlTec.png" alt=""></a>
+        <ul class="lista_links_menu">
+            <li><a href="../Monitoramento/visaoGlobal.html">Visão Global</a></li>
+            <li><a href="../Monitoramento/visaoMaquina.html">Visão Máquina</a></li>
+
+            <li><a href="../blacklist.html">Blacklist</a></li>
+            <li id="link_gestor"><a href="../administrador.html">Administrador</a></li>
+        </ul>
+        <a href="#"><i onclick="setModal()" id="header__profile" class="fas fa-user-circle"></i></a>
+    </header>
+
+
+
+    <div id="modal" class="bg-modal">
+        <div id="profile__modal" class="modal">
+            <i id="modal__i-user" class="fas fa-user-circle"></i> <br>
+            <span id="modal__spn-nome"></span> <br> <br>
+            <span id="modal__spn-email"></span> <br> <br>
+            <a href="profile.html"><button id="modal__btn-config">Configurar conta</button></a>
+            <div id="modal__div-linha"></div>
+            <button onclick="finalizar_sessao('login.html')" id="modal__btn-sair">Sair</button>
+        </div>
+
+        <div onclick="fecharModal()" class="fundo" style="width: 100%; height: 100%; ">
+
+        </div>
+    </div>
+
+
+    <div class="showcase">
+        <div class="container">
+            <img src="img/Logo-DotControlTec.png" alt="">
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+<script src="js/function.js"></script>

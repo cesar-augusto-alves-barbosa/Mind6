@@ -1,0 +1,186 @@
+.showcase {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bg_pop_up_alerta {
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 30%;
+    z-index: 10;
+    display: none;
+}
+.div_pop_up_alerta {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+.pop_up_alerta {
+    width: 30%;
+    height: 50%;
+    background-color: #FFF;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.fechar_pop_up {
+    margin-right: 30px;
+    align-self: flex-end;
+    width: min-content;
+    font-weight: bold;
+    cursor: pointer;
+    top: 0;
+}
+
+
+.mensagem_pop_up {
+    text-align: center;
+    font-weight: bold;
+    width: 80%;
+}
+
+.div_box_btns {
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn_pop_up_confirmar {
+    background-color: #0000ff;
+}
+
+.btn_pop_up_cancelar {
+    background-color: #9e0000;
+}
+
+.btn_pop_up {
+    cursor: pointer;
+    color: white;
+    width: 90%;
+    height: 7vh;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.container_black_list {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    background-color: #FFF;
+    box-shadow: 0px 0px 10px black; 
+}
+
+.container_black_list__divisoria {
+    height: 90%;
+    width: 3px;
+    background-color: #2222FF;
+    border: none;
+    margin: 0;
+}
+
+.container_black_list__formulario_cadastro  {
+    height:90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container_black_list__formulario_cadastro label {
+    text-align: center;
+    font-weight: bold;
+}
+.alerta_processo {
+    padding: 5px;
+    color: rgb(250, 164, 4);
+    background-color:rgb(253, 237, 147);
+    width: 85%;
+    font-size: 12px;
+}
+.container_black_list__formulario_cadastro input {
+    width: 80%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+
+
+.container_black_list__btn_adicionar {
+    width: 30%;
+    height: 10%;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    background-color: #2222FF;
+    color: #FFF;
+}
+
+.loading_blacklist {
+    display: none; 
+    bottom: 0; 
+    height: 50px;
+    margin: 0 auto;
+}
+#loading_tabela_processos {
+    display: block;
+    height: 30vh;
+}
+
+.div_tabela_blacklist {
+    height: min-content;
+    max-height: 80%;
+    width: 50%;
+    background-color: white;
+    margin: auto auto;
+    overflow-y: scroll;
+    min-width: 300px;
+}
+.div_tabela_blacklist h3 {
+    margin: 0 auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+.tabela_blacklist {
+    margin: 30px auto;
+    width: 90% ;
+    border-collapse: collapse;
+}
+.tabela_blacklist td, th{
+    border: 3px solid black;
+}
+
+.tabela_blacklist th {
+    font-size: 20px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.tabela_blacklist tr {
+    font-size: 13px;
+}
+
+.tabela_blacklist tr td {
+    padding: 10px;
+    text-align: center;
+}

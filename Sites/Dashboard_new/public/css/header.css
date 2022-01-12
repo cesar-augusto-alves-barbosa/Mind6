@@ -1,0 +1,149 @@
+
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: #ededed;
+}
+input, button, img {
+    outline: none;
+}
+button {
+    transition-duration: .5s;
+}
+button:active {
+    transform: scale(0.9);
+}
+ul{
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    border-bottom: rgb(206, 206, 206) 1px solid;
+    padding: 0!important;
+}
+.menu ul li{
+    list-style: none;
+    padding-top: 12px;
+    display: inline-block;
+    position: relative;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+}
+
+.menu ul li:hover{
+    
+    background-color: rgb(238, 238, 238);
+}
+
+
+a{
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+#header__logo{
+    width: 100px;
+    float: left;
+    cursor: pointer;
+}
+
+#header__profile{
+    font-size: 50px;
+    float: right;
+    cursor: pointer;
+    color: grey;    
+    margin-top: 5px;
+}
+
+/* Modal */
+.bg-modal{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 2;
+    display: none;
+    top: 80px;
+    
+}
+
+.modal{
+
+    width: 330px;
+    height: 350px;
+    background-color: white;
+    border-radius: 5px;
+    float: right ;
+    margin: 10px 1.5% 0px 0px;
+    transition: 350ms;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: rgb(206, 206, 206) 0.5px solid;
+}
+
+
+#profile__modal{
+    text-align: center;
+    padding-top: 10px;
+}
+
+#profile__modal .fa-user-circle{
+    font-size: 100px;
+    color: grey;
+    margin-bottom: 15px;
+}
+
+#modal__spn-nome{
+    font-size: 18px;
+    
+}
+
+#modal__spn-email{
+    font-size: 16px;
+    margin-top: 20px;
+    color: grey;
+}
+
+#modal__btn-config{
+    background-color: white;
+    width: 200px;
+    height: 35px;
+    border: rgb(221, 221, 221) 0.3px solid;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+#modal__div-linha{
+    width: 100%;
+    height: 0.5px;
+    background-color: rgb(189, 189, 189);
+    margin-bottom: 20px;
+}
+
+#modal__btn-sair{
+    background-color: white;
+    width: 60px;
+    height: 35px;
+    border: rgb(221, 221, 221) 0.3px solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#modal__btn-config:hover, #modal__btn-sair:hover{
+    background-color: rgb(237, 237, 237);
+}

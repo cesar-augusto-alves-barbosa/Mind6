@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADM Mind 6</title>
+    <link rel="stylesheet" href="css/header.css">
+    <script src="https://kit.fontawesome.com/f87ccf6615.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/administrador.css">
+    <link rel="shortcut icon" href="./img/logofavicon.png" type="image/x-icon">
+    <script language="JavaScript" src="js/md5.js"></script>
+</head>
+
+<body>
+    <header class="menu" id="menuBar">
+        <a href="../index.html"><img id="header__logo" src="../img/Logo-DotControlTec.png" alt=""></a>
+        <ul class="lista_links_menu">
+            <li><a href="../Monitoramento/visaoGlobal.html">Visão Global</a></li>
+            <li><a href="../Monitoramento/visaoMaquina.html">Visão Máquina</a></li>
+
+            <li><a href="../blacklist.html">Blacklist</a></li>
+            <li id="link_gestor"><a href="../administrador.html">Administrador</a></li>
+        </ul>
+        <a href="#"><i onclick="setModal()" id="header__profile" class="fas fa-user-circle"></i></a>
+    </header>
+    <iframe style="display:none;" name="contato" src="administrador.html"></iframe>
+    <div id="modal" class="bg-modal">
+        <div id="profile__modal" class="modal">
+            <i id="modal__i-user" class="fas fa-user-circle"></i> <br>
+            <span id="modal__spn-nome"></span> <br> <br>
+            <span id="modal__spn-email"></span> <br> <br>
+            <a href="../profile.html"><button id="modal__btn-config">Configurar conta</button></a>
+            <div id="modal__div-linha"></div>
+            <button onclick="finalizar_sessao('../login.html')" id="modal__btn-sair">Sair</button>
+        </div>
+
+        <div onclick="fecharModal()" class="fundo" style="width: 100%; height: 100%; ">
+
+        </div>
+    </div>
+
+    <div class="showcase">
+        <div class="container-tecnico">
+            <form target="contato" id="form_cadastro" href="administrador.html" method="post"
+                class="container-tecnico__formulario_cadastro container-tecnico__formularios">
+                <label for="">CADASTRO DE USUÁRIO</label>
+                <input type="text" placeholder="Nome Completo" name="nome" id="nomeTec">
+                <input type="email" placeholder="Email" name="email" id="emailTec">
+                <input type="password" placeholder="Senha" name="senha" id="senhaTec">
+                <input type="text" placeholder="Telefone" name="telefone" id="foneTec">
+                <div class="container-tecnico__formulario_cadastro container-tecnico__formulario_cadastro__option_adm">
+                    <input type="checkbox" name="Adm" id="administrador">
+                    <span>Definir como 2° ADM</span>
+                </div>
+                <input type="text" id="id_tecnico" name="idTecnico" style="display: none;">
+                <input type="text" id="fk_escola" name="fkEscola" style="display: none;">
+                <button onclick="return cadastrarTecnico()"
+                    class="container-tecnico__formularios__btn_adicionar">Adicionar</button>
+                <div id="resposta_cadastro"></div>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script src="js/function.js"></script>
+<script>
+
+    function cadastrarTecnico() {
+        fk_escola.value = sessionStorage.fkEscola;
+        senhaTec.value = calcMD5(senhaTec.value);
+        let adm;
+        if (administrador.value == "On") {
+            id_tecnico.value = null;
+        } else {
+            id_tecnico.value = sessionStorage.id_usuario_meuapp;
+        }
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch(`/tecnico/cadastrar`, {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+            if (response.ok) {
+                alert('Cadastrado');
+                nomeTec.value = '';
+                emailTec.value = '';
+                senhaTec.value = '';
+                foneTec.value = '';
+                return false;
+            } else {
+                response.text().then(texto => {
+                    resposta_cadastro.innerHTML = texto;
+                });
+            }
+        });
+    }
+
+    function redireciona_gestor() {
+        if (sessionStorage.gestor == "false") {
+            document.body.style.display = "none";
+
+            window.location.href = "index.html";
+            alert("Você não possui permissões de administrador, por favor contate o suporte!")
+        }
+    }
+    redireciona_gestor();
+</script>

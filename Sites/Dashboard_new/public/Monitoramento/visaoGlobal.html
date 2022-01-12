@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/visaoGlobal.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="shortcut icon" href="../img/logofavicon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f87ccf6615.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <title>Visão Global</title>
+</head>
+
+<body>
+
+    <header class="menu" id="menuBar">
+        <a href="../index.html"><img id="header__logo" src="../img/Logo-DotControlTec.png" alt=""></a>
+        <ul class="lista_links_menu">
+            <li><a href="../Monitoramento/visaoGlobal.html">Visão Global</a></li>
+            <li><a href="../Monitoramento/visaoMaquina.html">Visão Máquina</a></li>
+
+            <li><a href="../blacklist.html">Blacklist</a></li>
+            <li id="link_gestor"><a href="../administrador.html">Administrador</a></li>
+        </ul>
+        <a href="#"><i onclick="setModal()" id="header__profile" class="fas fa-user-circle"></i></a>
+    </header>
+
+
+
+    <div id="modal" class="bg-modal">
+        <div id="profile__modal" class="modal">
+            <i id="modal__i-user" class="fas fa-user-circle"></i> <br>
+            <span id="modal__spn-nome"></span> <br> <br>
+            <span id="modal__spn-email"></span> <br> <br>
+            <a href="../profile.html"><button id="modal__btn-config">Configurar conta</button></a>
+            <div id="modal__div-linha"></div>
+            <button onclick="finalizar_sessao('../login.html')" id="modal__btn-sair">Sair</button>
+        </div>
+
+        <div onclick="fecharModal()" class="fundo" style="width: 100%; height: 100%; ">
+
+        </div>
+    </div>
+
+    <div class="showcase-conteudo">
+        <div class="container-esquerda">
+            <div>
+                <span class="container-esquerda_titulo-nome-escola"><b>VISÃO GLOBAL DA ESCOLA <b
+                            id="container-esquerda__b-nomeEscola"></b></b></span>
+            </div>
+
+            <div id="container-esquerda__div-alertas" class="container-esquerda__div-configuracao">
+                <span><b>ALERTAS</b></span>
+                <table class="tabela_alertas">
+                    <thead>
+                        <th></th>
+                        <th>Hora</th>
+                        <th>Status</th>
+                        <th>Máquina</th>
+                        <th>Problema</th>
+                    </thead>
+                    <tbody id="alertas_maquinas">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="container-esquerda__div-tecnicosAtivo" class="container-esquerda__div-configuracao">
+                <span><b>Técnicos Online/Offline</b></span>
+                <table class="tabela_tecnicos">
+                    <thead>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Disponibilidade</th>
+                    </thead>
+                    <tbody id="tecnicos_on_off">
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="container-direita">
+
+            <div id="container-direita__div-usoRede" class="container-direita__div-configuracao">
+                <canvas id="grafico_media_cpu_computadores" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
+
+            <div id="container-direita__div-mediaUsoCpu" class="container-direita__div-configuracao">
+                <span><b>Status das máquinas</b></span>
+                <table class="tabela_status_maquinas">
+                    <thead>
+                        <th>Nome</th>
+                        <th>Disponibilidade</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody id="status_maquinas">
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script src="../js/function.js"></script>
+<script src="../js/chartsVisaoGlobal.js"></script>
+<script>
+    function alteraData(data) {
+        var dataFormatada = data.substring(0, data.indexOf("T"));
+        var dadosData = dataFormatada.split("-");
+
+        var dataFinal = dadosData[2] + "/" + dadosData[1] + "/" + dadosData[0] + " ";
+        return dataFinal;
+    }
+    function alteraHora(Hora) {
+        var horaFormatada = Hora.substring(11, Hora.indexOf("."));
+        return horaFormatada;
+    }
+    document.getElementById('container-esquerda__b-nomeEscola').innerHTML = sessionStorage.nome_escola_meuapp.toUpperCase();
+    function addAlerts() {
+        fetch(`/alerta/recuperar/alertas/${sessionStorage.fkEscola}`, {
+            method: "GET"
+        }).then(response => {
+
+            if (response.ok) {
+                response.json().then(json => {
+                    let statusMaquina;
+                    let txtStatus;
+                    for (let i = 0; i < json.length; i++) {
+                        if (json[i].tipoAlerta == 'PERIGO') {
+                            txtStatus = `<td style="color: red; font-weight: bold;">${json[i].tipoAlerta}</td>`;
+                            statusMaquina = '<i style="color: red; font-size: 30px" class="fas fa-exclamation-triangle"></i>'
+                        } else {
+                            txtStatus = `<td style="color: #ffbc00; font-weight: bold;">${json[i].tipoAlerta}</td>`;
+                            statusMaquina = '<i style="color: #ffbc00; font-size: 30px" class="fas fa-exclamation-triangle"></i>'
+                        }
+                        alertas_maquinas.innerHTML += `
+                            <tr>
+                                <td>${statusMaquina}</td>
+                                <td>${alteraData(json[i].dataHora) + alteraHora(json[i].dataHora)}</td>
+                                ${txtStatus}
+                                <td>${json[i].nomeComputador}</td>
+                                <td>${json[i].descricaoAlerta}</td>
+                            </tr>
+                        `;
+                    }
+                })
+            } else {
+
+                console.log('Erro ao recuperar alertas!');
+
+                response.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        });
+    }
+    function getTecnicos() {
+        fetch(`/tecnico/recuperar/${sessionStorage.fkEscola}`, {
+            method: 'GET'
+        }).then(result => {
+            if (result.ok) {
+
+                result.json().then(json => {
+
+                    for (let i = 0; i < json.length; i++) {
+                        let disponibilidadeTecnico;
+                        if (json[i].disponibilidade == true) {
+                            disponibilidadeTecnico = '<i style="color: green; font-size: 20px" class="far fa-check-circle"></i>';
+                        } else {
+                            disponibilidadeTecnico = '<i style="color: red; font-size: 20px" class="far fa-times-circle"></i>';
+                        }
+                        tecnicos_on_off.innerHTML += `
+                            <tr>
+                                <td>${json[i].nomeTecnico}</td>
+                                <td>${json[i].emailTec}</td>
+                                <td>${json[i].telefoneTec}</td>
+                                <td>${disponibilidadeTecnico}</td>
+                            </tr>
+                        `;
+                    }
+                })
+            } else {
+                result.text().then(texto => {
+                    alert(texto);
+                    console.error(texto);
+                })
+            }
+        });
+    }
+    getTecnicos();
+    addAlerts();
+</script>

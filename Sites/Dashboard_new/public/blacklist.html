@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="./css/blacklist.css">
+    <link rel="shortcut icon" href="./img/logofavicon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/f87ccf6615.js" crossorigin="anonymous"></script>
+    <title>Black List - Mind 6</title>
+</head>
+
+<body>
+    <div id='bgPopUpAlerta' class="bg_pop_up_alerta"></div>
+    <div id='divPopUpAlerta' class="div_pop_up_alerta">
+        <div id='PopUpAlerta' class="pop_up_alerta">
+            <div onclick="fecharPopUp()" class="fechar_pop_up">X</div>
+            <div class="mensagem_pop_up">
+                Atenção! Essa opção excluirá o processo de todas as máquinas da escola. Deseja continuar ?
+            </div>
+            <div class="div_box_btns">
+                <button onclick="removerProcessoEscola()" class="btn_pop_up btn_pop_up_confirmar">Confirmar</button>
+                <button onclick="fecharPopUp()" class="btn_pop_up btn_pop_up_cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <header class="menu" id="menuBar">
+        <a href="../index.html"><img id="header__logo" src="../img/Logo-DotControlTec.png" alt=""></a>
+        <ul class="lista_links_menu">
+            <li><a href="../Monitoramento/visaoGlobal.html">Visão Global</a></li>
+            <li><a href="../Monitoramento/visaoMaquina.html">Visão Máquina</a></li>
+
+            <li><a href="../blacklist.html">Blacklist</a></li>
+            <li id="link_gestor"><a href="../administrador.html">Administrador</a></li>
+        </ul>
+        <a href="#"><i onclick="setModal()" id="header__profile" class="fas fa-user-circle"></i></a>
+    </header>
+
+
+
+    <div id="modal" class="bg-modal">
+        <div id="profile__modal" class="modal">
+            <i id="modal__i-user" class="fas fa-user-circle"></i> <br>
+            <span id="modal__spn-nome"></span> <br> <br>
+            <span id="modal__spn-email"></span> <br> <br>
+            <a href="profile.html"><button id="modal__btn-config">Configurar conta</button></a>
+            <div id="modal__div-linha"></div>
+            <button onclick="finalizar_sessao('login.html')" id="modal__btn-sair">Sair</button>
+        </div>
+
+        <div onclick="fecharModal()" class="fundo" style="width: 100%; height: 100%; ">
+
+        </div>
+    </div>
+
+
+
+
+    <div class="showcase">
+        <div class="container_black_list">
+            <iframe style="display:none;" name="blacklist" src="blacklist.html"></iframe>
+            <form target="blacklist" id="form_cadastro" href="blacklist.html" method="post"
+                class="container_black_list__formulario_cadastro">
+                <label for="">CADASTRO DE PROCESSO NA BLACKLIST</label>
+                <label for="">Insira o nome do processo que você deseja adicionar a blacklist</label>
+                <label for="" class="alerta_processo">Atenção! Escreva exatamente o nome do processo que é exibido na
+                    máquina, caso o contrário não funcionará!</label>
+                <input type="text" placeholder="Nome do Processo" name="nome" id="nomeProcesso">
+                <button onclick="return verificaProcessoExistente()"
+                    class="container_black_list__btn_adicionar">Adicionar</button>
+                <img id="loading" src="./img/gifLoading.gif" class="loading_blacklist">
+                <div id="resposta_cadastro"></div>
+            </form>
+            <hr class="container_black_list__divisoria">
+            <div id="div_tabelaBlacklist" class="div_tabela_blacklist">
+
+                <table id="tabela_processos_escola" class="tabela_blacklist">
+                    <thead>
+                        <th>Processo(s) Bloqueado(s)</th>
+                        <th></th>
+                    </thead>
+                    <tbody id="tabela_processos_blacklist">
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+<script src="js/function.js"></script>
+
+<script>
+    let processoExistenteEscola = false;
+    function recuperaProcessosEscola() {
+        div_tabelaBlacklist.innerHTML = '<img id="loading_tabela_processos" src="./img/gifLoading.gif" class="loading_blacklist">';
+        fetch(`/blacklist/recuperar_processos/${sessionStorage.fkEscola}`, {
+            method: "POST",
+        }).then(response => {
+            if (response.ok) {
+
+                response.json().then(json => {
+
+                    div_tabelaBlacklist.innerHTML = `
+                    <h3>BlackList Escola</h3>
+                    <table id="tabela_processos_escola" class="tabela_blacklist">
+                                <thead>
+                                    <th>Nome Processo(s)</th>
+                                </thead>
+                                <tbody id="tabela_processos_blacklist">
+
+
+                                </tbody>
+                            </table>`;
+                    for (let i = 0; i < json.length; i++) {
+
+                        tabela_processos_blacklist.innerHTML += `
+                            <tr>
+                                <td>${json[i].nomeProcesso}</td>
+                                <td><i onclick="abrirPopUp(${json[i].idBlacklist})" style="color: red; cursor: pointer; font-size: 20px" class="far fa-times-circle"></i></td>
+                            </tr>
+                        `;
+                    }
+
+                });
+
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        });
+    }
+    function verificaProcessoExistente() {
+        loading.style.display = 'block';
+        tabela_processos_escola.style.display = 'none';
+        fetch(`/blacklist/recuperar_blacklist`, {
+            method: "GET",
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(json => {
+                    let processo = nomeProcesso.value.trim();
+                    if (processo != '') {
+                        let processoExistente = false;
+                        for (let i = 0; i < json.length; i++) {
+                            console.log(json[i].nomeProcesso)
+                            if (processo == json[i].nomeProcesso) {
+                                processoExistente = true;
+                                recuperarIdBlackList(processo);
+                                break;
+                            }
+                        }
+                        if (!processoExistente) {
+                            inserirProcessoBlackList(processo);
+                        }
+                    } else {
+
+                        loading.style.display = 'none';
+                        resposta_cadastro.innerHTML = '';
+                        resposta_cadastro.innerHTML = "<span style='color: red'>Insira o nome do processo</span>";
+                        recuperaProcessosEscola()
+                    }
+                });
+
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        });
+    }
+    function inserirProcessoBlackList(processo) {
+        fetch(`/blacklist/inserir_processo_blacklist/${processo}`, {
+            method: "POST",
+        }).then(response => {
+            if (response.ok) {
+                recuperarIdBlackList(processo);
+
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        });
+    }
+    function validaEscolaBlackList(idProcesso) {
+
+        fetch(`/blacklist/recuperar_blacklist_escola_especifica/${sessionStorage.fkEscola}/${idProcesso}`, {
+            method: "POST",
+        }).then(response => {
+            if (response.ok) {
+                response.json().then(json => {
+                    if (json.length > 0) {
+                        processoExistenteEscola = true;
+                    }
+                });
+
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        });
+    }
+    function recuperarIdBlackList(processo) {
+        fetch(`/blacklist/recuperar_idBlackList/${processo}`, {
+            method: "GET",
+        }).then(response => {
+            debugger;
+            if (response.ok) {
+                response.json().then(json => {
+                    debugger;
+                    validaEscolaBlackList(json[0].idBlacklist);
+                    let intervaloVerificacao = setInterval(() => {
+                        if (!processoExistenteEscola) {
+                            inserirEscolaBlackList(json[0].idBlacklist);
+                        } else {
+                            loading.style.display = 'none';
+                            resposta_cadastro.innerHTML = '';
+                            resposta_cadastro.innerHTML = "<span style='color: red'>Este processo já existe na Black List da sua escola</span>";
+                            recuperaProcessosEscola()
+                        }
+                        clearInterval(intervaloVerificacao);
+                    }, 2000)
+
+                });
+
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        });
+    }
+    function inserirEscolaBlackList(idProcesso) {
+        fetch(`/blacklist/inserir_escola_has_blacklist/${sessionStorage.fkEscola}/${idProcesso}`, {
+            method: "POST",
+        }).then(response => {
+            if (response.ok) {
+
+                response.json().then(json => {
+
+                    loading.style.display = 'none';
+                    resposta_cadastro.innerHTML = '';
+                    resposta_cadastro.innerHTML = "<span style='color: green'>Inserido com sucesso</span>";
+                    recuperaProcessosEscola();
+
+                });
+
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        });
+    }
+    recuperaProcessosEscola();
+</script>
+<script src="./js/removerProcessoBackListEscola.js"></script>
