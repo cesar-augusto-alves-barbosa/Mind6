@@ -1,0 +1,329 @@
+:root {
+    --cor-principal: #0f0fd8;
+    --cor-secundaria: #1B2431;
+    --cor-secundaria-rgba: #1b2431b2;
+    --cor-terciaria: #016795;
+    --cor-quartenaria: #1E488F;
+}
+
+body,
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+
+.laboratorio {
+    width: 100vw;
+    background: url('../img/laboratorio-edit.jpg') center top no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    height: 665px;
+}
+
+.fbody {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw !important;
+}
+
+.home-g1 h1 {
+    font-size: 40px;
+    margin: 5px 0px 3px 0px;
+}
+
+.home-g1 p {
+    font-size: 15px;
+    text-align: justify;
+}
+
+img.imgMind {
+    width: 43vw;
+    margin: 20px -4px 20px 35px;
+}
+
+.cardHome {
+    width: 90%;
+    margin: auto;
+}
+
+.cardHome {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 15px 0px 30px 66px;
+}
+
+
+.laboratorio div {
+    background: rgba(0, 0, 0, 0.5);
+    height: 525px;
+    width: 100vw;
+    text-align: center;
+}
+
+.cor {
+    width: 100vw;
+    height: 10vh;
+    padding-top: 140px;
+}
+
+.cor h1 {
+    margin-top: 106px;
+    font-size: 4vw;
+    color: white;
+}
+
+.cor button {
+    width: 140px;
+    height: 50px;
+    color: white;
+    margin-top: 60px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--cor-terciaria);
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.infoProject4 {
+    width: 100%;
+    height: 310px;
+    background: url(../img/meeting.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.infoProject4 {
+    color: white;
+}
+
+.project4 {
+    text-align: center;
+    width: 96%;
+    margin: auto;
+}
+
+.project4 {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    height: auto;
+    list-style: none;
+}
+
+.CardVant {
+    margin: 25px 10px;
+    height: 260px;
+
+    background-color: var(--cor-secundaria-rgba);
+}
+
+.CardVant h1 {
+    margin-top: 90px;
+}
+
+.cardcontroltec img {
+    width: 450px;
+}
+
+.cardcontroltec {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 100px 90px 90px 77px;
+}
+
+.controltec-g1 p {
+    font-size: 17px;
+    text-align: justify;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 1200px) {
+    .laboratorio {
+        height: 100vh;
+    }
+
+    .laboratorio div {
+        height: 79vh;
+        width: 100vw;
+    }
+
+    .cardHome {
+        margin: 15px 0px 30px 55px;
+    }
+
+    img.imgMind {
+        width: 44vw;
+        margin: 60px 0px 20px 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .laboratorio {
+        height: 100vh;
+    }
+
+    .laboratorio div {
+        height: 79vh;
+        width: 100vw;
+    }
+
+    .cardHome {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 15px 0px 30px 48px;
+    }
+
+    img.imgMind {
+        width: 50vw;
+        margin: 20px 0px 20px 185px;
+    }
+
+    .cardcontroltec {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 40px 90px 90px 77px;
+    }
+
+    .cardcontroltec img {
+        width: 450px;
+        margin: auto 20vw;
+    }
+
+    .controltec-g1 p {
+        font-size: 17px;
+        margin-top: 20px;
+        text-align: justify;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    .laboratorio {
+        width: 100vw;
+        background: url(../img/laboratorio-edit.jpg) center top no-repeat;
+        background-size: 100%;
+        background-attachment: fixed;
+        height: 75vh;
+    }
+
+    .laboratorio div {
+        background: rgba(0, 0, 0, 0.5);
+        height: 54vh;
+        width: 100vw;
+        text-align: center;
+    }
+
+    .cor h1 {
+        margin-top: 60px;
+        font-size: 4vw;
+        color: white;
+    }
+
+    .cor button {
+        width: 140px;
+        height: 50px;
+        color: white;
+        margin-top: 35px;
+        border: none;
+        cursor: pointer;
+        background-color: var(--cor-terciaria);
+        font-size: 20px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    .cardHome {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 2vw 8.3vw;
+    }
+
+    .home-g1 {
+        width: 83vw;
+    }
+
+    img.imgMind {
+        width: 83vw;
+        margin: 20px 0px 20px 0px;
+    }
+
+    .CardVant h1 {
+        margin-top: 12vw;
+    }
+
+    /* .cardcontroltec {
+        margin: 40px 40px 80px 40px;
+    } */
+
+.cardcontroltec {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 35px 50px 90px 50px;
+}
+
+.cardcontroltec img {
+    margin: 0px 30px 31px 80px;
+    width: 65vw;
+}
+}
+
+@media only screen and (max-width: 600px) {
+    .laboratorio {
+        height: 60vw;
+    }
+
+    .laboratorio div {
+        background: rgba(0, 0, 0, 0);
+        text-align: center;
+    }
+
+    .cor h1 {
+        margin-top: 30px;
+        font-size: 5vw;
+        text-shadow: 4px 1px black;
+        color: #ffffff;
+    }
+
+    .cor button {
+        margin-top: 30px;
+    }
+
+    .cardHome {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 30px 20px 20px 63px;
+    }
+
+    .home-g1 {
+        width: 80vw;
+    }
+
+    img.imgMind {
+        width: 482px;
+        margin: 20px 20px 20px 2px;
+    }
+
+    .CardVant h1 {
+        margin-top: 50px;
+    }
+
+    .cardcontroltec {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 40px 40px 80px 40px;
+    }
+
+    /* .cardcontroltec {
+        margin: 35px 50px 90px 50px;
+    } */
+
+    .cardcontroltec img {
+        margin: 0px 20px 31px 22px;
+        width: 440px;
+    }
+}
+
+*/

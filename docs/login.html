@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Entrar</title>
+</head>
+
+<body>
+    <div class="login">
+        <div class="left__login">
+
+        </div>
+
+        <div class="right__login">
+            <img src="./images/Logo-DotControlTec.png" alt="">
+            <form onclick="return entrar()" id="form_login" method="post">
+                <span id="right__span-titulo">Entre com sua conta</span> <br> <br>
+                <input placeholder="nome@example.com" type="email" id="login" name="login" class="right__input">
+                <br>
+                <input placeholder="senha" type="password" id="senha" name="senha" class="right__input"> <br>
+
+                <button type="submit" class="right__button">Entrar</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../routes/tecnico.js"></script>
+<script>
+
+    function entrar() {
+        var formulario = new URLSearchParams(new FormData(form_login));
+        fetch("/tecnico/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(response => {
+            if (response.ok) {
+
+                response.json().then(json => {
+                    console.log(json)
+                    sessionStorage.login_usuario_meuapp = json.emailTec;
+                    sessionStorage.fkEscola = json.fkEscola;
+                    window.location.href = 'home.html';
+                });
+
+            } else {
+
+                console.log('Erro de login!');
+
+                response.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        });
+
+        return false;
+    }
+
+</script>

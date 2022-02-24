@@ -137,20 +137,25 @@
                 response.json().then(json => {
                     let statusMaquina;
                     let txtStatus;
-                    for (let i = 0; i < json.length; i++) {
-                        if (json[i].tipoAlerta == 'PERIGO') {
-                            txtStatus = `<td style="color: red; font-weight: bold;">${json[i].tipoAlerta}</td>`;
+                    jsonSimulado = {
+                        nomeComputador: "PC-021",
+                        descricaoAlerta: "CPU sobre aquecida",
+                        dataHora: "05-03-2020T.10:12:20",
+                    }
+                    for (let i = 0; i < jsonSimulado.length; i++) {
+                        if (jsonSimulado[i].tipoAlerta == 'PERIGO') {
+                            txtStatus = `<td style="color: red; font-weight: bold;">${jsonSimulado[i].tipoAlerta}</td>`;
                             statusMaquina = '<i style="color: red; font-size: 30px" class="fas fa-exclamation-triangle"></i>'
                         } else {
-                            txtStatus = `<td style="color: #ffbc00; font-weight: bold;">${json[i].tipoAlerta}</td>`;
+                            txtStatus = `<td style="color: #ffbc00; font-weight: bold;">${jsonSimulado[i].tipoAlerta}</td>`;
                             statusMaquina = '<i style="color: #ffbc00; font-size: 30px" class="fas fa-exclamation-triangle"></i>'
                         }
                         alertas_maquinas.innerHTML += `
                             <tr>
                                 <td>${statusMaquina}</td>
-                                <td>${alteraData(json[i].dataHora) + alteraHora(json[i].dataHora)}</td>
+                                <td>${alteraData(jsonSimulado[i].dataHora) + alteraHora(jsonSimulado[i].dataHora)}</td>
                                 ${txtStatus}
-                                <td>${json[i].nomeComputador}</td>
+                                <td>${jsonSimulado[i].nomeComputador}</td>
                                 <td>${json[i].descricaoAlerta}</td>
                             </tr>
                         `;

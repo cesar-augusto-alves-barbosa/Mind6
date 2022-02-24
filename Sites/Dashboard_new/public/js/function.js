@@ -52,22 +52,22 @@ function finalizar_sessao(Page) {
 //     sessionStorage.clear();
 // };
 
-function validar_sessao() {
-    var login_usuario = sessionStorage.login_usuario_meuapp;
-    fetch(`/tecnico/sessao/${login_usuario}`, { cache: 'no-store' })
-        .then(resposta => {
-            if (resposta.ok) {
-                resposta.text().then(texto => {
-                    console.log('Sessão :) ', texto);
-                });
-            } else {
-                console.error('Sessão :.( ');
-                finalizar_sessao('../login.html');
-            }
-        });
-}
+// function validar_sessao() {
+//     var login_usuario = sessionStorage.login_usuario_meuapp;
+//     fetch(`/tecnico/sessao/${login_usuario}`, { cache: 'no-store' })
+//         .then(resposta => {
+//             if (resposta.ok) {
+//                 resposta.text().then(texto => {
+//                     console.log('Sessão :) ', texto);
+//                 });
+//             } else {
+//                 console.error('Sessão :.( ');
+//                 finalizar_sessao('../login.html');
+//             }
+//         });
+// }
 
-validar_sessao();
+// validar_sessao();
 
 
 

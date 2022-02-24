@@ -1,0 +1,206 @@
+:root {
+    --cor-principal: #0f0fd8;
+    --cor-secundaria: #1B2431;
+    --cor-terciaria: #016795;
+    --cor-quartenaria: #1E488F;
+}
+
+body, html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.laboratorio {
+    width: 100%;
+    background: url('../img/julian-hochgesang-Dkn8-zPIbwo-unsplash-min.jpg') center top no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 470px;
+}
+
+.laboratorio div {
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.cor h1 {
+    text-transform: uppercase;
+    color: white;
+    font-size: 100px;
+    text-shadow: 2px 2px black;
+}
+
+#contato h1.contateNos {
+    /* text-align: center; */
+    text-transform: uppercase;
+    font-size: 45px;
+    color: rgb(0, 0, 0);
+    margin: 0px 0px 15px 0px;
+}
+
+h1.contatoMap {
+    font-size: 15px;
+}
+
+#contato p {
+    font-weight: 600;
+    text-align: justify;
+}
+
+h3 {
+    font-size: 15px;
+    font-weight: 600;
+
+    margin-bottom: 20px;
+}
+
+.grid-contato {
+    margin: 25px 15px 100px 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    height: auto;
+}
+
+.textContato {
+    height: 380px;
+}
+
+.contatoMap {
+    margin-left: 35px;
+}
+
+form {
+    margin: auto;
+    padding: 5px 0px;
+
+    border-radius: 8px;
+
+    max-width: 730px;
+}
+
+form fieldset {
+    margin-top: 15px;
+    border: 0;
+}
+
+form .field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 24px;
+}
+
+form .field-group {
+    display: flex;
+}
+
+form input,
+form select {
+    background-color: #d3dfff;
+
+    border: 0;
+    padding: 16px 24px;
+    font-size: 16px;
+
+    border-radius: 8px;
+}
+
+form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+form label {
+    margin: 10px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+}
+
+form button {
+    width: 200px;
+    height: 50px;
+
+    background-color: var(--cor-terciaria);
+    border-radius: 8px;
+
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 16px;
+
+    border: 0;
+
+    transition: 400ms;
+    cursor: pointer;
+}
+
+/*RESPONSIVIDADE*/
+@media (max-width: 1200px) {
+    .grid-contato {
+        margin: 4vh 8vh 10vw 1vw;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+    }
+
+    .contatoMap {
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .grid-contato {
+        margin: 4vh 3vw 15vh 3vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+    }
+
+    iframe {
+        width: 44vw;
+        height: 82vh;
+    }
+}
+
+@media (max-width: 768px) {
+    iframe {
+        width: 44vw;
+        height: 85vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .laboratorio {
+        height: 370px;
+    }
+
+    .grid-contato {
+        grid-template-columns: 1fr;
+    }
+
+    #contato p {
+        width: 95vw;
+    }
+
+    form .field {
+        flex: none;
+        width: 95vw;
+    }
+
+    .contatoMap {
+        margin: 55vh auto;
+    }
+
+    iframe {
+        width: 570px;
+    }
+}
