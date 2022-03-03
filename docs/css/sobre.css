@@ -151,23 +151,36 @@ Time MIND6
 }
 
 .cardsTeam {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-
-    height: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.card {
+.card-team {
     margin: 15px 6px;
-    height: 380px;
+    padding: 20px;
+
+    min-width: 200px;
+
+    flex: 1;
 
     background-color: var(--cor-secundaria);
 }
 
-.card img {
+
+.card-team img {
     width: 55%;
+    margin: 0 auto;
     margin-top: 20px;
     border-radius: 360px;
+}
+.icon-card{
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+#animation-container {
+    margin: 0!important;
+    padding: 0;
 }
 
 /*Ajuste de imagem*/
@@ -181,28 +194,40 @@ Time MIND6
 
 /*Final de Ajuste*/
 
-.card h1 {
+.card-team h1 {
     text-transform: uppercase;
     margin: 10px auto 10px auto;
 
     color: rgb(255, 255, 255);
 }
 
-.card p {
+.card-team p {
     font-weight: 500;
     margin-bottom: 5px;
     color: #f2f2f2;
 }
 
-.card a i {
+.card-team a {
     font-size: 35px;
     letter-spacing: 10px;
 
     margin-top: 5px;
 }
 
-.card i {
+.card-team i {
     color: #f2f2f2;
+}
+
+.read {
+    width: 300px;
+
+    margin: 0 auto;
+
+    text-align: justify;
+}
+
+.read h1 {
+    text-align: center;
 }
 
 
@@ -252,28 +277,27 @@ Time MIND6
         margin: 10px 23vw;
     }
 
+    .aboutUs__p p {
+        font-size: 16px;
+    }
+
     #Team {
         padding-top: 11px;
         background-color: var(--cor-quartenaria);
         margin-top: 25px;
     }
 
-    .cardsTeam {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        height: auto;
-    }
 
     .container-card {
-        display: flex;
         flex-wrap: wrap;
         width: 100%;
         max-width: 90%;
         min-height: 100vh;
         height: auto;
-        align-items: center;
-        justify-content: space-around;
-        margin: 0 7vw;
+        margin: 20px auto;
         text-align: center;
+    }
+    .card p {
+        margin: 0 20px;
     } 
 }

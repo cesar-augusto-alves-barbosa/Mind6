@@ -163,25 +163,25 @@ input {
     border-top: 5px solid var(--cor-terciaria);
     background-color: var(--cor-secundaria);
     color: white;
-    height: 265px;
     position: relative;
+    padding: 50px;
     z-index: -1;
-}
-
-.footer .footer-content {
-    height: 240px;
-    display: flex;
 }
 
 .footer .footer-content .footer-section {
     flex: 1;
 }
 
+.footer-section {
+    min-width: 200px;
+
+    margin: 20px;
+}
 .footer .footer-content {
+    display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin-left: -47px;
     /* margin-right: 8px; */
 }
 
@@ -190,16 +190,6 @@ input {
     margin-bottom: 10px;
 }
 
-/* Footer | Localização */
-
-.footer .footer-content .location p {
-    font-size: 15px;
-}
-
-.footer .footer-content .mind {
-    padding-top: 10px;
-
-}
 
 .footer .footer-content .mind span {
     color: var(--cor-principal);
@@ -228,18 +218,18 @@ input {
     margin-top: 10px;
 }
 
-.footer .footer-bottom {
+.footer-bottom {
     background-color: black;
     color: #808080;
-    height: 29px;
     width: 100%;
     text-align: center;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
     display: flex;
+}
+
+.footer-bottom span {
+    margin: 10px;
 }
 
 @keyframes anm-links {
@@ -326,6 +316,10 @@ input {
     .menu ul li a {
         font-size: 1.5em;
     }
+
+    .footer-section p {
+        margin: 0;
+    }
 }
 
 @media (max-width: 992px) {
@@ -345,22 +339,12 @@ input {
 }
 
 /*FOOTER*/
-@media only screen and (max-width: 600px) {
-    .footer {
-        height: 90vh;
-    }
-
+@media only screen and (max-width: 723px) {
     .footer .footer-content {
-        height: 110px;
-        display: block;
-    }
-
-    .footer .footer-content {
-        margin-left: 3px;
-    }
-
-    .footer .footer-content .footer-section {
-        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .footer .footer-content img {
@@ -383,14 +367,7 @@ input {
         font-size: 1.3em;
     }
 
-    .footer .footer-bottom {
-        height: 41px;
-    }
 
-}
-
-/*FOOTER*/
-@media (max-width: 992px) {
 
 }
 
@@ -412,6 +389,7 @@ input {
     h1 {
         font-size: 26px;
     }
+    
 
     .footer .footer-content .contate p {
         font-size: 10px;
