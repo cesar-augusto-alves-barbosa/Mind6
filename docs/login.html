@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="./css/login.css">
     <title>Entrar</title>
 </head>
 
@@ -15,8 +15,8 @@
         </div>
 
         <div class="right__login">
-            <img src="./images/Logo-DotControlTec.png" alt="">
-            <form onclick="return entrar()" id="form_login" method="post">
+            <img src="./img/Logo-DotControlTec.png" alt="">
+            <form id="form_login">
                 <span id="right__span-titulo">Entre com sua conta</span> <br> <br>
                 <input placeholder="nome@example.com" type="email" id="login" name="login" class="right__input">
                 <br>
@@ -29,8 +29,7 @@
 </body>
 
 </html>
-<script src="../routes/tecnico.js"></script>
-<script>
+<!-- <script>
 
     function entrar() {
         var formulario = new URLSearchParams(new FormData(form_login));
@@ -44,7 +43,7 @@
                     console.log(json)
                     sessionStorage.login_usuario_meuapp = json.emailTec;
                     sessionStorage.fkEscola = json.fkEscola;
-                    window.location.href = 'home.html';
+                    window.location.href = 'index.html';
                 });
 
             } else {
@@ -60,4 +59,4 @@
         return false;
     }
 
-</script>
+</script> -->
