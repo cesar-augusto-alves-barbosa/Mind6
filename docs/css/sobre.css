@@ -153,18 +153,25 @@ Time MIND6
 .cardsTeam {
     display: flex;
     flex-wrap: wrap;
+    padding: 20px 0;
 }
 
 .card-team {
-    margin: 15px 6px;
-    padding: 20px;
+    margin: 20px 20px;
+    padding: 10px;
 
     min-width: 200px;
-
     flex: 1;
 
     background-color: var(--cor-secundaria);
+
+    transition-duration: 1s;
 }
+
+.card-team h1, .card-team p {
+    cursor: default;
+}
+
 
 
 .card-team img {
@@ -172,6 +179,25 @@ Time MIND6
     margin: 0 auto;
     margin-top: 20px;
     border-radius: 360px;
+    transition-duration: .5s;
+}
+.card-team:hover {
+    transform: scale(1.05);
+    padding: 0;
+    
+    z-index: 0;
+    box-shadow: 1px 1px 10px black;
+}
+.card-team:hover img {
+    width: 100%;
+    margin-top: 0;
+    border-radius: 0;
+}
+.card-team i {
+    transition-duration: .5s;
+}
+.card-team i:hover {
+    color: var(--cor-terciaria);
 }
 .icon-card{
     width: 55%;
@@ -232,6 +258,7 @@ Time MIND6
 
 
 /*RESPONSIVIDADE*/
+
 @media (max-width: 1200px) {
     .cor h1 {
         text-transform: uppercase;
@@ -258,7 +285,7 @@ Time MIND6
 
 @media only screen and (max-width: 600px) {
     .cor h1 {
-        font-size: 60px;
+        font-size: 10vw;
         margin-top: 65px;
     }
 

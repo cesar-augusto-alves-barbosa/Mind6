@@ -42,12 +42,9 @@ img.imgMind {
     margin: 20px -4px 20px 35px;
 }
 
-.cardHome {
-    width: 90%;
-    margin: auto;
-}
 
 .cardHome {
+    width: 90%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 15px 0px 30px 66px;
@@ -61,19 +58,19 @@ img.imgMind {
     text-align: center;
 }
 
-.cor {
+.title-banner {
     width: 100vw;
     height: 10vh;
     padding-top: 140px;
 }
 
-.cor h1 {
+.title-banner h1 {
     margin-top: 106px;
     font-size: 4vw;
     color: white;
 }
 
-.cor button {
+.title-banner button {
     width: 140px;
     height: 50px;
     color: white;
@@ -84,6 +81,11 @@ img.imgMind {
     font-size: 20px;
     border-radius: 10px;
     font-weight: bold;
+    transition-duration: .5s;
+}
+
+.title-banner button:hover {
+    transform: scale(1.05);
 }
 
 .infoProject4 {
@@ -93,9 +95,6 @@ img.imgMind {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-}
-
-.infoProject4 {
     color: white;
 }
 
@@ -103,9 +102,6 @@ img.imgMind {
     text-align: center;
     width: 96%;
     margin: auto;
-}
-
-.project4 {
     display: grid;
     grid-template-columns: 1fr;
 
@@ -216,13 +212,13 @@ img.imgMind {
         text-align: center;
     }
 
-    .cor h1 {
+    .title-banner h1 {
         margin-top: 60px;
         font-size: 4vw;
         color: white;
     }
 
-    .cor button {
+    .title-banner button {
         width: 140px;
         height: 50px;
         color: white;
@@ -280,14 +276,14 @@ img.imgMind {
         text-align: center;
     }
 
-    .cor h1 {
+    .title-banner h1 {
         margin-top: 30px;
         font-size: 5vw;
         text-shadow: 4px 1px black;
         color: #ffffff;
     }
 
-    .cor button {
+    .title-banner button {
         margin-top: 30px;
     }
 

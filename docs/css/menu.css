@@ -46,7 +46,7 @@ input {
     width: 100%;
     height: 100px;
     color: white;
-    z-index: 1;
+    z-index: 2;
 }
 
 .top_bar_menu_responsive {
@@ -82,7 +82,7 @@ input {
     height: 0;
     z-index: -1;
     position: absolute;
-    transition-duration: 1s;
+    transition-duration: .5s;
 }
 
 .menu ul {
@@ -124,6 +124,7 @@ input {
     font-size: 15px;
     text-transform: uppercase;
     font-family: 'Krona One', sans-serif;
+    transition-duration: 1s;
 }
 
 .menu ul li {
@@ -153,9 +154,8 @@ input {
 }
 
 .hover a:hover {
-    border-radius: 20px;
-    background: var(--cor-quartenaria);
-    transition-duration: 1s;
+    font-size: 18px;
+    text-shadow: 4px 4px 1px black;
 }
 
 /*Footer (Rodapé)*/
@@ -272,6 +272,7 @@ input {
 @media (max-width: 1016px) {
     .top_bar_menu_responsive {
         display: flex;
+        z-index: 1;
     }
 
     .menu .logo {
