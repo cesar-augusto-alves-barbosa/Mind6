@@ -5,11 +5,15 @@ var Alerta = require('../models').Alerta;
 var Computador = require('../models').Computador;
 
 router.get('/recuperar/alertas/:fkEscola', function (req, res, next) {
-    console.log(`Recuperando Alertas de uma máquina especifica`);
+    console.log(`Recuperando Alertas`);
     const hoje = new Date();
-    const hojeSqll = `${hoje.getFullYear()} - ${hoje.getMonth() + 1} - ${hoje.getDate()}`;
+    const hojeSqll = `${hoje.getFullYear()}-${hoje.getMonth() + 1}-${hoje.getDate()}`;
     console.log(hojeSqll);
-    let instrucaoSql = `select * from Alerta, Computador where idComputador = fkComputador and dataHora between '${hojeSqll} 00:00:00' and '${hojeSqll} 23:59:59' and fkEscola = ${req.params.fkEscola};`;
+    let instrucaoSql = `SELECT *
+    FROM Alerta a
+    JOIN Computador c ON a.fkComputador = c.idComputador
+    WHERE a.dataHora BETWEEN '${hojeSqll} 00:00:00' AND '${hojeSqll} 23:59:59'
+      AND c.fkEscola = ${req.params.fkEscola};`;
     console.log("Instrucao" + instrucaoSql);
     sequelize.query(instrucaoSql, {
         model: Alerta,
@@ -27,8 +31,11 @@ router.get('/recuperar/alertas/:fkEscola', function (req, res, next) {
 
 
 router.get('/recuperar_maquina_especifica/:idComputador', function (req, res, next) {
-    console.log(`Recuperando Alertas`);
-    let instrucaoSql = `select * from Alerta, Computador where idComputador = ${req.params.idComputador} and idComputador = fkComputador;`;
+    console.log(`Recuperando Alertas de uma máquina especifica`);
+    let instrucaoSql = `SELECT *
+    FROM Alerta a
+    JOIN Computador c ON a.fkComputador = c.idComputador
+    WHERE c.idComputador = ${req.params.idComputador};`;
 
     sequelize.query(instrucaoSql, {
         model: Alerta

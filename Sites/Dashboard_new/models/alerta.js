@@ -66,6 +66,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        componenteAlerta: {
+            field: 'componenteAlerta',
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         descricaoAlerta: {
             field: 'descricaoAlerta',
             type: DataTypes.STRING,

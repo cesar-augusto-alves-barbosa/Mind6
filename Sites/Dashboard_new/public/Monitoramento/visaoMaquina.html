@@ -219,141 +219,145 @@
 
 <script>
     let disposicao_maq;
-    document.getElementById('container__div-graficos').style.display = 'block';
-        document.getElementById('container__div-pesquisa').style.display = 'none';
-        document.getElementById('div-pesquisa__btn-voltar').style.display = 'block';
-
-        document.getElementById('container__div-idlista').style.display = 'none';
-
-    // function searchMachine() {
-    //     let maquina = document.getElementById('div-pesquisa__inp-nomeComp').value;
-    //     if (maquina == '') {
-    //         listaMaquinas.innerHTML = '';
-    //         addMachines();
-    //     } else {
-
-    //         fetch(`/computador/recuperar_especifica/${sessionStorage.fkEscola}/${maquina}`, {
-    //             method: "GET"
-    //         }).then(response => {
-
-    //             if (response.ok) {
-    //                 listaMaquinas.innerHTML = '';
-    //                 let disponibilidade;
-    //                 response.json().then(json => {
-    //                     if (json[0].disponibilidade) {
-    //                         disponibilidade = '<td style="color: green; font-weight: bold;">On</td>'
-    //                     } else {
-    //                         disponibilidade = '<td style="color: red; font-weight: bold;">Off</td>'
-    //                     }
-    //                     listaMaquinas.innerHTML += `<tr class="tr-maquina" onclick="selectMachine(${"machine" + 0}, ${json.length})" id="machine${0}" data-idComputer="${json[0].idComputador}" data-disponibilidade="${json[0].disponibilidade}" >
-    //                         <td>${json[0].nomeComputador}</td>
-    //                         <td>${json[0].sistemaOperacional}</td>
-    //                         <td>${json[0].ipv4}</td>
-    //                         <td>${json[0].serialNum}</td>
-    //                         ${disponibilidade}
-    //                     </tr>`
-
-    //                     if (disponibilidade == "On") {
-    //                         disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: green;justify-content:center; display:flex; font-size: 50px; text-transform: uppercase">
-    //                         ${disponibilidade}</span></span>`;
-    //                     } else {
-    //                         disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: red;justify-content:center; display:flex; font-size: 50px;text-transform: uppercase"><br>
-    //                         ${disponibilidade}</span></span>`;
-    //                     }
-    //                 });
-
-    //             } else {
-
-    //                 console.log('Erro ao recuperar máquina especifica!');
-
-    //                 response.text().then(texto => {
-    //                     console.error(texto);
-    //                 });
-    //             }
-    //         });
-
-    //     }
-
-    // }
-
-    // function addMachines() {
-    //     fetch(`/computador/recuperar/${sessionStorage.fkEscola}`, {
-    //         method: "GET"
-    //     }).then(response => {
-
-    //         if (response.ok) {
-
-    //             response.json().then(json => {
-    //                 let disponibilidade;
-    //                 for (let i = 0; i < json.length; i++) {
-    //                     if (json[i].disponibilidade) {
-    //                         disponibilidade = '<td style="color: green; font-weight: bold;">On</td>'
-    //                     } else {
-    //                         disponibilidade = '<td style="color: red; font-weight: bold;">Off</td>'
-    //                     }
-    //                     listaMaquinas.innerHTML += `<tr class="tr-maquina" onclick="selectMachine(${"machine" + i}, ${json.length})" id="machine${i}" data-idComputer="${json[i].idComputador}" data-numeroserial="${json[i].serialNum}" data-ipv4="${json[i].ipv4}" data-so="${json[i].sistemaOperacional}" data-nomecomputador="${json[i].nomeComputador}" data-disponibilidade="${json[i].disponibilidade}">
-    //                         <td>${json[i].nomeComputador}</td>
-    //                         <td>${json[i].sistemaOperacional}</td>
-    //                         <td>${json[i].ipv4}</td>
-    //                         <td>${json[i].serialNum}</td>
-    //                         ${disponibilidade}
-    //                     </tr>`;
-
-    //                 }
-
-    //             });
-
-    //         } else {
-
-    //             console.log('Erro ao recuperar máquinas!');
-
-    //             response.text().then(texto => {
-    //                 console.error(texto);
-    //             });
-    //         }
-    //     });
-
-    // }
-    // // addMachines();
-
-    // function selectMachine(n, max) {
-    //     n.backgroundColor = "#0156ff"
-    //     let disponibilidadeComp = n.dataset.disponibilidade;
-    //     nomeMaquina = n.dataset.nomecomputador;
-    //     sistemaOperacionalMaquina = n.dataset.so;
-    //     ipv4Maquina = n.dataset.ipv4;
-    //     serialNumMaquina = n.dataset.numeroserial;
-    //     if (disponibilidadeComp == "true") {
-    //         setLigado();
-    //         disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: green;justify-content:center; display:flex; font-size: 50px; text-transform: uppercase">
-    //                         ON</span></span>`;
-    //     } else {
-    //         disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: red;justify-content:center; display:flex; font-size: 50px;text-transform: uppercase"><br>
-    //                         OFF</span></span>`;
-    //     }
-    //     let idMachineSelected = n.dataset.idcomputer;
-    //     sessionStorage.idComputador = idMachineSelected;
-    //     document.getElementById('container__div-graficos').style.display = 'block';
+    // document.getElementById('container__div-graficos').style.display = 'block';
     //     document.getElementById('container__div-pesquisa').style.display = 'none';
     //     document.getElementById('div-pesquisa__btn-voltar').style.display = 'block';
 
     //     document.getElementById('container__div-idlista').style.display = 'none';
 
-    //     percentColors = [
-    //         [0.0, "#a9d70b"],
-    //         [0.50, "#f9c802"],
-    //         [1.0, "#ff0000"]
-    //     ];
-    //     loadingInfoMaquina.style.display = 'block';
-    //     // let intervaloParaInformacoesMaquina = setInterval(() => {
-    //     //     atualizaInformacoesMaquina();
-    //     //     clearInterval(intervaloParaInformacoesMaquina);
-    //     // }, 2000);
-    //     // // atualizaGraficos()
-    //     // // recuperaProcessosComputador();
-    //     // let intervaloRercuperacaoProcessoEscola = setInterval(() => {
-    //     //     recuperaProcessosEscola();
-    //     //     clearInterval(intervaloRercuperacaoProcessoEscola);
-    //     // }, 1000)
-    // }
+    function searchMachine() {
+        let maquina = document.getElementById('div-pesquisa__inp-nomeComp').value;
+        if (maquina == '') {
+            listaMaquinas.innerHTML = '';
+            addMachines();
+        } else {
+
+            fetch(`/computador/recuperar_especifica/${sessionStorage.fkEscola}/${maquina}`, {
+                method: "GET"
+            }).then(response => {
+
+                if (response.ok) {
+                    listaMaquinas.innerHTML = '';
+                    let disponibilidade;
+                    response.json().then(json => {
+                        if (json[0].disponibilidade) {
+                            disponibilidade = '<td style="color: green; font-weight: bold;">On</td>'
+                        } else {
+                            disponibilidade = '<td style="color: red; font-weight: bold;">Off</td>'
+                        }
+                        listaMaquinas.innerHTML += `<tr class="tr-maquina" onclick="selectMachine(${"machine" + 0}, ${json.length})" id="machine${0}" data-idComputer="${json[0].idComputador}" data-disponibilidade="${json[0].disponibilidade}" >
+                            <td>${json[0].nomeComputador}</td>
+                            <td>${json[0].sistemaOperacional}</td>
+                            <td>${json[0].ipv4}</td>
+                            <td>${json[0].serialNum}</td>
+                            ${disponibilidade}
+                        </tr>`
+
+                        if (disponibilidade == "On") {
+                            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: green;justify-content:center; display:flex; font-size: 50px; text-transform: uppercase">
+                            ${disponibilidade}</span></span>`;
+                        } else {
+                            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: red;justify-content:center; display:flex; font-size: 50px;text-transform: uppercase"><br>
+                            ${disponibilidade}</span></span>`;
+                        }
+                    });
+
+                } else {
+
+                    console.log('Erro ao recuperar máquina especifica!');
+
+                    response.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+            });
+
+        }
+
+    }
+
+    function addMachines() {
+        fetch(`/computador/recuperar/${sessionStorage.fkEscola}`, {
+            method: "GET"
+        }).then(response => {
+
+            if (response.ok) {
+
+                response.json().then(json => {
+                    let disponibilidade;
+                    for (let i = 0; i < json.length; i++) {
+                        if (json[i].disponibilidade) {
+                            disponibilidade = '<td style="color: green; font-weight: bold;">On</td>'
+                        } else {
+                            disponibilidade = '<td style="color: red; font-weight: bold;">Off</td>'
+                        }
+                        listaMaquinas.innerHTML += `<tr class="tr-maquina" onclick="selectMachine(${"machine" + i}, ${json.length})" id="machine${i}" data-idComputer="${json[i].idComputador}" data-numeroserial="${json[i].serialNum}" data-ipv4="${json[i].ipv4}" data-so="${json[i].sistemaOperacional}" data-nomecomputador="${json[i].nomeComputador}" data-disponibilidade="${json[i].disponibilidade}">
+                            <td>${json[i].nomeComputador}</td>
+                            <td>${json[i].sistemaOperacional}</td>
+                            <td>${json[i].ipv4}</td>
+                            <td>${json[i].serialNum}</td>
+                            ${disponibilidade}
+                        </tr>`;
+
+                    }
+
+                });
+
+            } else {
+
+                console.log('Erro ao recuperar máquinas!');
+
+                response.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+        });
+
+    }
+    addMachines();
+
+    function selectMachine(n, max) {
+        
+        n.backgroundColor = "#0156ff"
+        let disponibilidadeComp = n.dataset.disponibilidade;
+        nomeMaquina = n.dataset.nomecomputador;
+        sistemaOperacionalMaquina = n.dataset.so;
+        ipv4Maquina = n.dataset.ipv4;
+        serialNumMaquina = n.dataset.numeroserial;
+        if (disponibilidadeComp == "true") {
+            setLigado();
+            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: green;justify-content:center; display:flex; font-size: 50px; text-transform: uppercase">
+                            ON</span></span>`;
+        } else {
+            disponivel.innerHTML = `<span>DISPONIBILIDADE: <span style="color: red;justify-content:center; display:flex; font-size: 50px;text-transform: uppercase"><br>
+                            OFF</span></span>`;
+        }
+        let idMachineSelected = n.dataset.idcomputer;
+        sessionStorage.idComputador = idMachineSelected;
+        recuperarInfoComponentesMaquina(idMachineSelected);
+        document.getElementById('container__div-graficos').style.display = 'block'; 
+        document.getElementById('container__div-pesquisa').style.display = 'none';
+        document.getElementById('div-pesquisa__btn-voltar').style.display = 'block';
+
+        document.getElementById('container__div-idlista').style.display = 'none';
+
+        percentColors = [
+            [0.0, "#a9d70b"],
+            [0.50, "#f9c802"],
+            [1.0, "#ff0000"]
+        ];
+        loadingInfoMaquina.style.display = 'block';
+        let intervaloParaInformacoesMaquina = setInterval(() => {
+            atualizaInformacoesMaquina();
+            clearInterval(intervaloParaInformacoesMaquina);
+        }, 2000);
+        atualizaGraficos()
+        recuperaProcessosComputador();
+        let intervaloRercuperacaoProcessoEscola = setInterval(() => {
+            recuperaProcessosEscola();
+            clearInterval(intervaloRercuperacaoProcessoEscola);
+        }, 1000)
+        
+    }
+    
 </script>

@@ -42,7 +42,11 @@ router.post('/autenticar', function (req, res, next) {
 	var senha = req.body.senha; // depois de .body, use o nome (name) do campo em seu formulário de login	
 	console.log(login);
 
-	let instrucaoSql = `select * from tecnico, escola where emailTec='${login}' and senhaTec='${senha}' and fkEscola = idEscola`;
+	let instrucaoSql = `SELECT *
+	FROM Tecnico t
+	JOIN Escola e ON t.fkEscola = e.idEscola
+	WHERE t.emailTec = '${login}'
+	  AND t.senhaTec = '${senha}';`;
 	sequelize.query(instrucaoSql, {
 		model: Tecnico
 	}).then(resultado => {
@@ -60,6 +64,8 @@ router.post('/autenticar', function (req, res, next) {
 		}
 
 	}).catch(erro => {
+		console.log("Erro na conexão de banco")
+		console.log("MENSAGEM DE ERRO: " + erro)
 		res.status(500).send(erro.message);
 	});
 });

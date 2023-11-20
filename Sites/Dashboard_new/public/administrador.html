@@ -70,7 +70,7 @@
 
     function cadastrarTecnico() {
         fk_escola.value = sessionStorage.fkEscola;
-        senhaTec.value = calcMD5(senhaTec.value);
+        //senhaTec.value = calcMD5(senhaTec.value); TIREI POIS ESTAVA ULTRAPASSANDO O LIMITE DE CARACTERES, ESTOU COM PREGUIÇA DE DROPAR A TABELA.
         let adm;
         if (administrador.value == "On") {
             id_tecnico.value = null;

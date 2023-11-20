@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 
 var express = require('express');
 var path = require('path');
@@ -29,8 +29,6 @@ app.use('/usoTotal', usoTotalRouter);
 app.use('/alerta', alertaRouter);
 app.use('/blacklist', blacklistRouter);
 app.use('/componente', componenteRouter);
-
-
 
 
 module.exports = app;

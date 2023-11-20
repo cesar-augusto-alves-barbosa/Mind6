@@ -277,10 +277,19 @@ html {
     flex-direction: column;
 }
 
+#container-graficos__div-tempCpu,
 #container-graficos__div-mediaCpu {
     width: 95%;
     padding-right: 20px;
     height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#grafico_comparacao_cpu_computadores,
+#grafico_comparacao_ram_computadores {
+    height: 320px!important;
+    width: 70%!important;
 }
 
 #container-graficos__div-tempCpu {

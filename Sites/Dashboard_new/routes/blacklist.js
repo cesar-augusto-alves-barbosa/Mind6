@@ -39,10 +39,8 @@ router.post('/recuperar_processos_computador/:fkComputador', function (req, res,
 
 router.post('/inserir_processo_blacklist/:processo', function (req, res, next) {
     console.log(`Inserindo processo ${req.params.processo} na blacklist `);
-    let instrucaoSql = `insert Blacklist values('${req.params.processo}')`;
-    sequelize.query(instrucaoSql, {
-        model: BlackList
-    }).then(resultado => {
+    let instrucaoSql = `insert Blacklist (nomeProcesso) values('${req.params.processo}')`;
+    sequelize.query(instrucaoSql).then(resultado => {
         res.json(resultado)
     }).catch(erro => {
         console.error(erro);
@@ -95,10 +93,8 @@ router.get('/recuperar_idBlackList/:processo', function (req, res, next) {
 
 router.post('/inserir_escola_has_blacklist/:fkEscola/:fkBlacklist', function (req, res, next) {
     console.log(`Inserindo processo bloqueado na escola ${req.params.fkEscola} na blacklist ${req.params.fkBlacklist}`);
-    let instrucaoSql = `insert Escola_has_Blacklist values(${req.params.fkEscola}, '${req.params.fkBlacklist}');`;
-    sequelize.query(instrucaoSql, {
-        model: escolaBlackList
-    }).then(resultado => {
+    let instrucaoSql = `insert Escola_has_Blacklist(fkEscola, fkBlacklist) values('${req.params.fkEscola}', '${req.params.fkBlacklist}');`;
+    sequelize.query(instrucaoSql).then(resultado => {
         res.json(resultado);
     }).catch(erro => {
         console.error(erro);
@@ -109,10 +105,8 @@ router.post('/inserir_escola_has_blacklist/:fkEscola/:fkBlacklist', function (re
 
 router.post('/inserir_computador_has_blacklist/:fkComputador/:fkBlacklist', function (req, res, next) {
     console.log(`Inserindo processo bloqueado no computador ${req.params.fkComputador} na blacklist ${req.params.fkBlacklist}`);
-    let instrucaoSql = `insert Computador_has_Blacklist values(${req.params.fkComputador}, '${req.params.fkBlacklist}');`;
-    sequelize.query(instrucaoSql, {
-        model: computadorBlackList
-    }).then(resultado => {
+    let instrucaoSql = `insert Computador_has_Blacklist(fkComputador, fkBlacklist) values('${req.params.fkComputador}', '${req.params.fkBlacklist}');`;
+    sequelize.query(instrucaoSql).then(resultado => {
         res.json(resultado);
     }).catch(erro => {
         console.error(erro);
@@ -124,9 +118,7 @@ router.post('/deletar_processos_escola/:fkEscola/:fkBlackList', function (req, r
     console.log(`Deletando processo na blacklist da escola ${req.params.fkEscola}`);
     let instrucaoSql = `delete from Escola_has_Blacklist where fkBlacklist = ${req.params.fkBlackList} and fkEscola = ${req.params.fkEscola};`;
 
-    sequelize.query(instrucaoSql, {
-        model: escolaBlackList
-    }).then(resultado => {
+    sequelize.query(instrucaoSql).then(resultado => {
         res.json(resultado);
     }).catch(erro => {
         console.error(erro);
@@ -138,9 +130,7 @@ router.post('/deletar_processos_computador/:fkComputador/:fkBlackList', function
     console.log(`Deletando processo na blacklist do Computador ${req.params.fkComputador}`);
     let instrucaoSql = `delete from Computador_has_Blacklist where fkBlacklist = ${req.params.fkBlackList} and fkComputador = ${req.params.fkComputador};`;
 
-    sequelize.query(instrucaoSql, {
-        model: computadorBlackList
-    }).then(resultado => {
+    sequelize.query(instrucaoSql).then(resultado => {
         res.json(resultado);
     }).catch(erro => {
         console.error(erro);

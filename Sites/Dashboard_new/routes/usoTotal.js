@@ -5,9 +5,14 @@ var usoTotal = require('../models').usoTotal;
 
 
 router.get('/recuperar/:idComputador/:tipoComponente', function (req, res, next) {
-    console.log(`Recuperando uso da CPU`);
-    let instrucaoSql = `select top 5 * from UsoTotal, Componente where Componente.tipoComponente='${req.params.tipoComponente}' and 
-    Componente.fkComputador=${req.params.idComputador} and Componente.idComponente = UsoTotal.fkComponente order by idUsoAtual desc;`;
+    console.log(`Recuperando uso do componente`);
+    let instrucaoSql = `SELECT *
+    FROM UsoTotal
+    JOIN Componente ON Componente.idComponente = UsoTotal.fkComponente
+    WHERE Componente.tipoComponente = '${req.params.tipoComponente}'
+        AND Componente.fkComputador = ${req.params.idComputador}
+    ORDER BY idUsoAtual DESC
+    LIMIT 5;`;
     sequelize.query(instrucaoSql, {
         model: usoTotal
     }).then(resultado => {
@@ -19,8 +24,14 @@ router.get('/recuperar/:idComputador/:tipoComponente', function (req, res, next)
 });
 
 router.get('/recuperar_todos_usos/:fkEscola', function (req, res, next) {
-    console.log(`Recuperando uso da CPU`);
-    let instrucaoSql = `select ut.usoComponente, cp.tipoComponente, cp.fkComputador from UsoTotal ut, Componente cp, Computador c where c.fkEscola = ${req.params.fkEscola} and c.idComputador = cp.fkComputador and cp.idComponente = ut.fkComponente order by idUsoAtual desc;`;
+    console.log(`Recuperando uso da CPU de todos os PCs da escola ${req.params.fkEscola}`);
+    let instrucaoSql = `SELECT ut.usoComponente, cp.tipoComponente, cp.fkComputador
+    FROM UsoTotal ut
+    JOIN Componente cp ON ut.fkComponente = cp.idComponente
+    JOIN Computador c ON cp.fkComputador = c.idComputador
+    WHERE c.fkEscola = ${req.params.fkEscola}
+    AND cp.tipoComponente = 'CPU'
+    ORDER BY ut.idUsoAtual DESC;`;
     sequelize.query(instrucaoSql, {
         model: usoTotal
     }).then(resultado => {
@@ -34,21 +45,33 @@ router.get('/recuperar_todos_usos/:fkEscola', function (req, res, next) {
 router.get('/recuperar_media_computadores/:fkEscola/:tipoComponente', function (req, res, next) {
     console.log(`Recuperando média`);
     const hoje = new Date();
-    const hojeSqll = `${hoje.getFullYear()} - ${hoje.getMonth() + 1} - ${hoje.getDate()}`;
-    const ontemSql = `${hoje.getFullYear()} - ${hoje.getMonth() + 1} - ${hoje.getDate() - 1}`;
-    const antesOntemSql = `${hoje.getFullYear()} - ${hoje.getMonth() + 1} - ${hoje.getDate() - 2}`;
-    let instrucaoSql = `select(
-        select AVG(ut.usoComponente) from Computador cp, Componente c, UsoTotal ut where cp.fkEscola = ${req.params.fkEscola} and cp.idComputador = c.fkComputador and 
-        c.idComponente = ut.fkComponente and c.tipoComponente = '${req.params.tipoComponente}' and ut.dataHora BETWEEN '${antesOntemSql} 00:00:00' and '${antesOntemSql} 23:59:59'
-    ) as antesOntem,
-    (
-        select AVG(ut.usoComponente) from Computador cp, Componente c, UsoTotal ut where cp.fkEscola = ${req.params.fkEscola} and cp.idComputador = c.fkComputador and 
-        c.idComponente = ut.fkComponente and c.tipoComponente = '${req.params.tipoComponente}' and ut.dataHora BETWEEN '${ontemSql} 00:00:00' and '${ontemSql} 23:59:59'
-    ) as ontem,
-    (
-        select AVG(ut.usoComponente) from Computador cp, Componente c, UsoTotal ut where cp.fkEscola = ${req.params.fkEscola} and cp.idComputador = c.fkComputador and 
-        c.idComponente = ut.fkComponente and c.tipoComponente = '${req.params.tipoComponente}' and ut.dataHora BETWEEN '${hojeSqll} 00:00:00' and '${hojeSqll} 23:59:59'
-    ) as atual`;
+    const hojeSqll = `${hoje.getFullYear()}-${hoje.getMonth() + 1}-${hoje.getDate()}`;
+    const ontemSql = `${hoje.getFullYear()}-${hoje.getMonth() + 1}-${hoje.getDate() - 1}`;
+    const antesOntemSql = `${hoje.getFullYear()}-${hoje.getMonth() + 1}-${hoje.getDate() - 2}`;
+    let instrucaoSql = `SELECT
+    (SELECT AVG(ut.usoComponente)
+     FROM Computador cp
+     JOIN Componente c ON cp.idComputador = c.fkComputador
+     JOIN UsoTotal ut ON c.idComponente = ut.fkComponente
+     WHERE cp.fkEscola = ${req.params.fkEscola}
+       AND c.tipoComponente = '${req.params.tipoComponente}'
+       AND ut.dataHora BETWEEN '${antesOntemSql} 00:00:00' AND '${antesOntemSql} 23:59:59') as antesOntem,
+    
+    (SELECT AVG(ut.usoComponente)
+     FROM Computador cp
+     JOIN Componente c ON cp.idComputador = c.fkComputador
+     JOIN UsoTotal ut ON c.idComponente = ut.fkComponente
+     WHERE cp.fkEscola = ${req.params.fkEscola}
+       AND c.tipoComponente = '${req.params.tipoComponente}'
+       AND ut.dataHora BETWEEN '${ontemSql} 00:00:00' AND '${ontemSql} 23:59:59') as ontem,
+    
+    (SELECT AVG(ut.usoComponente)
+     FROM Computador cp
+     JOIN Componente c ON cp.idComputador = c.fkComputador
+     JOIN UsoTotal ut ON c.idComponente = ut.fkComponente
+     WHERE cp.fkEscola = ${req.params.fkEscola}
+       AND c.tipoComponente = '${req.params.tipoComponente}'
+       AND ut.dataHora BETWEEN '${hojeSqll} 00:00:00' AND '${hojeSqll} 23:59:59') as atual;`;
 
     sequelize.query(instrucaoSql, {
         model: usoTotal
@@ -62,8 +85,13 @@ router.get('/recuperar_media_computadores/:fkEscola/:tipoComponente', function (
 
 router.get('/recuperar_media/:idComputador', function (req, res, next) {
     console.log(`Recuperando media`);
-    let instrucaoSql = `select cp.nomeComputador, c.idComponente, c.tipoComponente, ut.usoComponente, ut.dataHora from Computador cp, Componente c, UsoTotal ut where cp.fkEscola = 2 and cp.idComputador = c.fkComputador and
-    c.tipoComponente = 'CPU' and cp.idComputador = c.fkComputador and c.idComponente = ut.fkComponente order by ut.usoComponente desc ;`;
+    let instrucaoSql = `SELECT cp.nomeComputador, c.idComponente, c.tipoComponente, ut.usoComponente, ut.dataHora
+    FROM Computador cp
+    JOIN Componente c ON cp.idComputador = c.fkComputador
+    JOIN UsoTotal ut ON c.idComponente = ut.fkComponente
+    WHERE cp.fkEscola = 2
+      AND c.tipoComponente = 'CPU'
+    ORDER BY ut.usoComponente DESC;`;
 
     sequelize.query(instrucaoSql, {
         model: usoTotal

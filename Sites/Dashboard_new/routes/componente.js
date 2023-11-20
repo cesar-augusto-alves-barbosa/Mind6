@@ -13,7 +13,7 @@ router.get('/recuperar/:fkComputador', function (req, res, next) {
     }).then(resultado => {
         res.json(resultado);
     }).catch(erro => {
-        console.error(erro);
+        console.error('ERRO AO CONSULTAR COMPONENTES DE UM PC: ' + erro);
         res.status(500).send(erro.message);
     });
 });

@@ -16,7 +16,7 @@ var config = {
         labels: ["Hoje", "Ontem", "Anteontem"],
         datasets: [{
             label: 'CPU',
-            borderColor: window.chartColors.blue,
+            borderColor: "#00000",
             backgroundColor: '#1111FF',
             data: [],// AQUI É INSERIDO A OS DADOS OU SEJA A QUANTIDADE QUE VAI SER EXIBIDA NO GRAFICO
             fill: false,
@@ -170,7 +170,7 @@ function recuperarComputador() {
 
 }
 
-let tempo = 0;
+var tempo = 0;
 function atualizaTabelaStatus() {
 
     if (primeiraVezStatus) {
@@ -181,7 +181,7 @@ function atualizaTabelaStatus() {
     let recupera_maquinas_usos = setInterval(() => {
         computadores = [];
         usos = [];
-        usoMaquinas();
+        plotarGraficoMediaCpu();
         recuperarComputador();
         atualizaTabelaStatus();
         clearInterval(recupera_maquinas_usos);
@@ -243,7 +243,7 @@ function atualizaTabelaStatus() {
         clearInterval(recuperacao_maquinas);
     }, tempo + 1000);
 }
-atualizaTabelaStatus();
+
 
 
 
@@ -258,6 +258,3 @@ function analisaStatusComponente(dado) {
     }
 }
 
-
-atualizaGraficos()
-plotarGraficoMediaCpu();

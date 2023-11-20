@@ -26,11 +26,11 @@ create table Tecnico (
 
 create table Computador (
 	idComputador int identity(1,1) primary key not null,
-	nomeComputador varchar(15) not null,
+	nomeComputador varchar(60) not null,
 	fkEscola int not null,
-    sistemaOperacional varchar(15) not null,
-    disonibilidade bit not null,
-    serialNum varchar(35) not null,
+    sistemaOperacional varchar(60) not null,
+    disponibilidade bit not null,
+    serialNum varchar(60) not null,
 	foreign key (fkEscola) references Escola(idEscola),
 	ipv4 varchar(15) not null,
 );
@@ -38,8 +38,9 @@ create table Computador (
  create table Alerta (
 	idAlerta int primary key identity(1,1) not null,
     tituloAlerta varchar(45) not null,
-    tipoAlerta varchar(20) not null,
-    descricaoAlerta varchar(45) not null,
+    tipoAlerta int not null,
+    componenteAlerta int not null, 
+    descricaoAlerta varchar(85) not null,
     fkComputador int,
     foreign key (fkComputador) references Computador(idComputador),
     dataHora datetime not null
