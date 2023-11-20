@@ -11,10 +11,8 @@ import com.mycompany.dotcontrolltec.computadores.Disco;
 import com.mycompany.dotcontrolltec.computadores.Grafico;
 import com.mycompany.dotcontrolltec.computadores.InformacoesSistema;
 import com.mycompany.dotcontrolltec.computadores.Ram;
-import com.mycompany.exemplo.bd.Blacklist;
-import com.mycompany.exemplo.bd.Computador;
-import com.mycompany.exemplo.bd.Conection;
-import com.mycompany.exemplo.bd.Tecnico;
+import com.mycompany.exemplo.bd.*;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -1005,22 +1003,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
         powershell.encerraProcesso();
         
         if(usoCpu > 90.0){
-        Slack slack = new Slack();
-        JSONObject json = new JSONObject();
-        
-        json.put("text", "------Alerta Vermelho------\n"+"IDComputador: "+fkComputador +"\nUso de Cpu: " + usoCpu.intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
-        
-        slack.sendMessage(json);
+            String select = "select * from Alerta where fkComputador = ? and  tipoAlerta = 2 and componenteAlerta = 1;";
+            List<Computador> alertaJaInserido = con.query(select,new BeanPropertyRowMapper(Alerta.class), fkComputador);
+            if(alertaJaInserido.isEmpty()) {
+                con.update("insert into Alerta (tituloAlerta, tipoAlerta, componenteAlerta, descricaoAlerta, fkComputador, dataHora) values(?,?,?,?,?,?)",
+                        "Alto uso de CPU",
+                        2,
+                        1,
+                        "Uso de CPU está em: " + usoCpu.intValue() + "%",
+                        fkComputador,
+                        LocalDateTime.now());
+            }
+            Slack slack = new Slack();
+            JSONObject json = new JSONObject();
+
+            json.put("text", "------Alerta Vermelho------\n"+"IDComputador: "+fkComputador +"\nUso de Cpu: " + usoCpu.intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
+
+            //slack.sendMessage(json);
         }
         
         if(usoCpu < 90.0 && usoCpu > 80.0){
-        Slack slack = new Slack();
-        JSONObject json = new JSONObject();
-        
-        json.put("text", "------Alerta Amarelo------\n"+"IDComputador: "+fkComputador +"\nUso de Cpu: " + usoCpu.intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
-      
-        slack.sendMessage(json);
-        System.out.println("teste " + json);
+            String select = "select * from Alerta where fkComputador = ? and  tipoAlerta = 1 and componenteAlerta = 1;";
+            List<Computador> alertaJaInserido = con.query(select,new BeanPropertyRowMapper(Alerta.class), fkComputador);
+            if(alertaJaInserido.isEmpty()) {
+                con.update("insert into Alerta (tituloAlerta, tipoAlerta, componenteAlerta, descricaoAlerta, fkComputador, dataHora) values(?,?,?,?,?,?)",
+                        "Alto uso de CPU",
+                        1,
+                        1,
+                        "Uso de CPU está em: " + usoCpu.intValue() + "%",
+                        fkComputador,
+                        LocalDateTime.now());
+            }
+            Slack slack = new Slack();
+            JSONObject json = new JSONObject();
+
+            json.put("text", "------Alerta Amarelo------\n"+"IDComputador: "+fkComputador +"\nUso de Cpu: " + usoCpu.intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
+
+            //slack.sendMessage(json);
+            System.out.println("teste " + json);
         }
         
         dadosCpu.addValue(usoCpu, "Uso da cpu", horario);
@@ -1031,7 +1051,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         }
         grafico.GraficoLinha(dadosCpu, "CPU","Hora", "% de uso", jpGraficoCpu);
-        con.update("insert into UsoTotal values(?,?,?)", usoCpu,LocalDateTime.now(), fkCpu);
+        con.update("insert into UsoTotal (usoComponente, dataHora, fkComponente) values(?,?,?)", usoCpu,LocalDateTime.now(), fkCpu);
         
         
 
@@ -1043,33 +1063,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblRamTotal.setText(String.format("%.2fGB", ram.qtdMemoriaRamTotal()));
         lblRamPorcentagemUso.setText(String.format("%.1f%%", ram.porcetagemDeMemoria()));
         lblRamTipoMemoria.setText(ram.tipoMemoria());
-//        
+
         Double usoRam = ram.qtdMemoriaRamUsada();
         Double espacoLivre = ram.qtdMemoriaRamLivre();
         dadosRam.setValue("em uso", usoRam);
         dadosRam.setValue("livre", espacoLivre);
         
         grafico.GraficoDunuts(dadosRam, "Ram", jpGraficoRam);
-        con.update("insert into UsoTotal values(?,?,?)",ram.porcetagemDeMemoria(),LocalDateTime.now() , fkRam);
+        con.update("insert into UsoTotal (usoComponente, dataHora, fkComponente) values(?,?,?)",ram.porcetagemDeMemoria(),LocalDateTime.now() , fkRam);
 
         
         if(ram.porcetagemDeMemoria() > 90.0){
-        Slack slack = new Slack();
-        JSONObject json = new JSONObject();
-        
-        json.put("text", "------Alerta Vermelho------\n"+"IDComputador: "+fkComputador +"\nUso de Ram: " + ram.porcetagemDeMemoria().intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
-        
-        slack.sendMessage(json);
+            String select = "select * from Alerta where fkComputador = ? and  tipoAlerta = 2 and componenteAlerta = 2;";
+            List<Computador> alertaJaInserido = con.query(select,new BeanPropertyRowMapper(Alerta.class), fkComputador);
+            if(alertaJaInserido.isEmpty()) {
+                con.update("insert into Alerta (tituloAlerta, tipoAlerta, componenteAlerta, descricaoAlerta, fkComputador, dataHora) values(?,?,?,?,?,?)",
+                        "Alto uso de memória",
+                        2,
+                        2,
+                        "Uso de memória está em: " + ram.porcetagemDeMemoria().intValue() + "%",
+                        fkComputador,
+                        LocalDateTime.now());
+            }
+
+            Slack slack = new Slack();
+            JSONObject json = new JSONObject();
+
+            json.put("text", "------Alerta Vermelho------\n"+"IDComputador: "+fkComputador +"\nUso de Ram: " + ram.porcetagemDeMemoria().intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
+
+           // slack.sendMessage(json);
         }
         
         if(ram.porcetagemDeMemoria() < 90.0 && ram.porcetagemDeMemoria() > 80.0){
-        Slack slack = new Slack();
-        JSONObject json = new JSONObject();
-        
-        json.put("text", "------Alerta Amarelo------\n"+"IDComputador: "+fkComputador +"\nUso de Ram: " + ram.porcetagemDeMemoria().intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
-      
-        slack.sendMessage(json);
-        System.out.println("teste " + json);
+            String select = "select * from Alerta where fkComputador = ? and  tipoAlerta = 1 and componenteAlerta = 2;";
+            List<Computador> alertaJaInserido = con.query(select,new BeanPropertyRowMapper(Alerta.class), fkComputador);
+            if(alertaJaInserido.isEmpty()) {
+                con.update("insert into Alerta (tituloAlerta, tipoAlerta, componenteAlerta, descricaoAlerta, fkComputador, dataHora) values(?,?,?,?,?,?)",
+                        "Elevado uso de memória",
+                        1,
+                        2,
+                        "Uso de memória está em: " + ram.porcetagemDeMemoria().intValue() + "%",
+                        fkComputador,
+                        LocalDateTime.now());
+            }
+
+            Slack slack = new Slack();
+            JSONObject json = new JSONObject();
+
+            json.put("text", "------Alerta Amarelo------\n"+"IDComputador: "+fkComputador +"\nUso de Ram: " + ram.porcetagemDeMemoria().intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
+
+           // slack.sendMessage(json);
+            System.out.println("teste " + json);
         }
     }
     public void exibeDisco() throws Exception{
@@ -1081,7 +1125,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dadosDisco.setValue("Livre", disco.qtdEspacoLivre());
         grafico.GraficoDunuts(dadosDisco, "uso disco", jpGraficoDisco);
 //        
-        con.update("insert into UsoTotal values(?,?,?)",disco.porcetagemDisco(),LocalDateTime.now() , fkDisco);
+        con.update("insert into UsoTotal (usoComponente, dataHora, fkComponente) values(?,?,?)",disco.porcetagemDisco(),LocalDateTime.now() , fkDisco);
         
         if(disco.porcetagemDisco() > 90.0){
         Slack slack = new Slack();
@@ -1089,7 +1133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         json.put("text", "------Alerta Vermelho------\n"+"IDComputador: "+fkComputador +"\nUso de Disco: " + ram.porcetagemDeMemoria().intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
         
-        slack.sendMessage(json);
+        // slack.sendMessage(json); TIREI PORQUE ESSA BOMBA PODE NEM ESTAR FUNCIONANDO MAIS
         }
         
         if(disco.porcetagemDisco() < 90.0 && disco.porcetagemDisco() > 80.0){
@@ -1098,7 +1142,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         json.put("text", "------Alerta Amarelo------\n"+"IDComputador: "+fkComputador +"\nUso de Disco: " + ram.porcetagemDeMemoria().intValue() + "%\n" + " Data: " + LocalDate.now() + "\n Hora: "+ LocalTime.now());
       
-        slack.sendMessage(json);
+       //slack.sendMessage(json);
         System.out.println("teste " + json);
         }
     }
@@ -1116,7 +1160,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             fkComputador = c.getIdComputador();
         };
 
-        String select = "select b.nomeProcesso from Computador_has_Blacklist ch, Computador c, Blacklist b where c.idComputador = ? and c.idComputador = ch.fkComputador and ch.fkBlacklist = b.idBlacklist;";
+        String select = "SELECT b.nomeProcesso FROM Computador_has_Blacklist ch JOIN Computador c ON ch.fkComputador = c.idComputador JOIN Blacklist b ON ch.fkBlacklist = b.idBlacklist WHERE c.idComputador = ?;";
         List<Blacklist> SelectProcesso = con.query(select,new BeanPropertyRowMapper(Blacklist.class),fkComputador);
 
         

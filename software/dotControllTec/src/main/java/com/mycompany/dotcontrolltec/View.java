@@ -147,9 +147,9 @@ public class View {
             
             ActionListener acao = (ActionEvent executar) -> {
                 
-                con.update("insert into UsoTotal values(?,?,?)",usoCpu,LocalDateTime.now(), fkCpu1);
-                con.update("insert into UsoTotal values(?,?,?)",usoDisco,LocalDateTime.now() ,fkDisco1);
-                con.update("insert into UsoTotal values(?,?,?)",usoRam,LocalDateTime.now() , fkRam1);
+                con.update("insert into UsoTotal (usoComponente, dataHora, fkComponente) values(?,?,?)",usoCpu,LocalDateTime.now(), fkCpu1);
+                con.update("insert into UsoTotal (usoComponente, dataHora, fkComponente) values(?,?,?)",usoDisco,LocalDateTime.now() ,fkDisco1);
+                con.update("insert into UsoTotal (usoComponente, dataHora, fkComponente) values(?,?,?)",usoRam,LocalDateTime.now() , fkRam1);
                 System.out.println("-------------------------------------------------");
                 System.out.println("                   Dados atuais                  ");
                 System.out.println("-------------------------------------------------");

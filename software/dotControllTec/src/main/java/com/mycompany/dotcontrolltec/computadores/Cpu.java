@@ -60,7 +60,8 @@ public class Cpu {
         return d * 100.0;
     }
     public Double Temperatura(){
-        return si.getHardware().getSensors().getCpuTemperature();
+        //return si.getHardware().getSensors().getCpuTemperature(); Tirei pois no meu PC não funciona :/
+        return 0.0;
     }
     public Integer quantidadeProcessos(){
         Integer qtdProcessos = si.getOperatingSystem().getProcesses().size();

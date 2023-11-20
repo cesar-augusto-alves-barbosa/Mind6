@@ -17,10 +17,10 @@ public class Conection {
        // Construtor
     public Conection() {
         this.datasource = new BasicDataSource();
-        this.datasource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        this.datasource.setUrl("jdbc:sqlserver://mind6.database.windows.net:1433;database=bddotControlTec;user=adm@mind6;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
-        this.datasource.setUsername("adm");
-        this.datasource.setPassword("#Gfgrupo4");
+        this.datasource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        this.datasource.setUrl("jdbc:mysql://localhost:3306/mindone");
+        this.datasource.setUsername("root");
+        this.datasource.setPassword("root");
     }
     
     

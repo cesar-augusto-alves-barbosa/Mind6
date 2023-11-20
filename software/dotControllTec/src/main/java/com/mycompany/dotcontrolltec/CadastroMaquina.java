@@ -110,7 +110,7 @@ public class CadastroMaquina extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         //cadastrando maquina
-        con.update("insert into Computador values(?,?,?,1,?,?)","Computador_"+serial, tecnico.getFkEscola(),is.sistemaOperacional(), serial, is.getIpv4());
+        con.update("insert into Computador (nomeComputador, fkEscola, sistemaOperacional, disponibilidade, serialNum, ipv4) values(?,?,?,1,?,?)","Computador_"+serial, tecnico.getFkEscola(),is.sistemaOperacional(), serial, is.getIpv4());
         
         //pegando id da maquina
         String select = "select * from Computador where serialnum = ?;";
@@ -120,9 +120,9 @@ public class CadastroMaquina extends javax.swing.JFrame {
         }
         
         //cadastrando componentes da maquina
-        con.update("insert into Componente values(?,'DISCO',?)",disco.nome(),fkComputador);
-        con.update("insert into Componente values(?,'RAM',?)",ram.tipoMemoria(),fkComputador);
-        con.update("insert into Componente values(?,'CPU',?)",cpu.nome(),fkComputador);
+        con.update("insert into Componente (nomeComponente, tipoComponente, fkComputador) values(?,'DISCO',?)",disco.nome(),fkComputador);
+        con.update("insert into Componente (nomeComponente, tipoComponente, fkComputador) values(?,'RAM',?)",ram.tipoMemoria(),fkComputador);
+        con.update("insert into Componente (nomeComponente, tipoComponente, fkComputador) values(?,'CPU',?)",cpu.nome(),fkComputador);
         
         //pegando o id de cada componente da maquina
         select = "select * from Componente where fkComputador = ?;";
